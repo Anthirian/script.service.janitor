@@ -118,22 +118,24 @@ class Cleaner:
                 if movies:
                     count = 0
                     for abs_path, title, year in movies:
-                        if xbmcvfs.exists(abs_path):
-                            cleaning_required = True
-                            if not self.delete_files:
-                                if self.create_subdirs:
-                                    new_path = os.path.join(self.holding_folder, "%s (%d)" % (title, year))
+                        paths = abs_path.replace("stack://","").split(",")
+                        for path in paths:
+                            if xbmcvfs.exists(path):
+                                cleaning_required = True
+                                if not self.delete_files:
+                                    if self.create_subdirs:
+                                        new_path = os.path.join(self.holding_folder, "%s (%d)" % (title, year))
+                                    else:
+                                        new_path = self.holding_folder
+                                    if self.move_file(path, new_path):
+                                        count += 1
+                                        self.delete_empty_folders(os.path.dirname(path))
                                 else:
-                                    new_path = self.holding_folder
-                                if self.move_file(abs_path, new_path):
-                                    count += 1
-                                    self.delete_empty_folders(os.path.dirname(abs_path))
+                                    if self.delete_file(abs_path):
+                                        count += 1
+                                        self.delete_empty_folders(os.path.dirname(path))
                             else:
-                                if self.delete_file(abs_path):
-                                    count += 1
-                                    self.delete_empty_folders(os.path.dirname(abs_path))
-                        else:
-                            self.debug("XBMC could not find the file at %s" % abs_path, xbmc.LOGWARNING)
+                                self.debug("XBMC could not find the file at %s" % abs_path, xbmc.LOGWARNING)
                     if count > 0:
                         summary += " %d %s" % (count, self.MOVIES)
 
