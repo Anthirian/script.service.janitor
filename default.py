@@ -142,23 +142,25 @@ class Cleaner:
                 if episodes:
                     count = 0
                     for abs_path, show_name, season_number in episodes:
-                        if xbmcvfs.exists(abs_path):
-                            if not self.delete_files:
-                                if self.create_subdirs:
-                                    new_path = os.path.join(self.holding_folder, show_name, "Season %d" % season_number)
+                        paths = abs_path.replace("stack://","").split(",")
+                        for path in paths:
+                            if xbmcvfs.exists(path):
+                                if not self.delete_files:
+                                    if self.create_subdirs:
+                                        new_path = os.path.join(self.holding_folder, show_name, "Season %d" % season_number)
+                                    else:
+                                        new_path = self.holding_folder
+                                    if self.move_file(path, new_path):
+                                        cleaning_required = True
+                                        count += 1
+                                        self.delete_empty_folders(os.path.dirname(path))
                                 else:
-                                    new_path = self.holding_folder
-                                if self.move_file(abs_path, new_path):
-                                    cleaning_required = True
-                                    count += 1
-                                    self.delete_empty_folders(os.path.dirname(abs_path))
+                                    if self.delete_file(path):
+                                        cleaning_required = True
+                                        count += 1
+                                        self.delete_empty_folders(os.path.dirname(path))
                             else:
-                                if self.delete_file(abs_path):
-                                    cleaning_required = True
-                                    count += 1
-                                    self.delete_empty_folders(os.path.dirname(abs_path))
-                        else:
-                            self.debug("XBMC could not find the file at %s" % abs_path, xbmc.LOGWARNING)
+                                self.debug("XBMC could not find the file at %s" % abs_path, xbmc.LOGWARNING)
                     if count > 0:
                         summary += " %d %s" % (count, self.TVSHOWS)
 
