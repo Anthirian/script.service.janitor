@@ -23,6 +23,7 @@
     <string id="32110">Clean XBMC video library after cleaning</string>
     <string id="32111">Delete empty folders after cleaning</string>
     <string id="32112">Ignore files with the following extensions (separate with commas)</string>
+    <string id="32113">Delete related with similar names when cleaning</string>
 
     <!-- Frequency section -->
     <string id="32201">[B]When should watched videos be deleted?[/B]</string>

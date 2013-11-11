@@ -23,6 +23,7 @@
     <string id="32110">XBMC videobibliotheek opschonen na schoonmaken</string>
     <string id="32111">Verwijder lege mappen na schoonmaken</string>
     <string id="32112">Negeer bestanden met de volgende extensies (scheiden met komma's)</string>
+    <string id="32113">Verwijder bestanden met vergelijkbare naam tijdens het verwijderen</string>
 
     <!-- Frequentietabblad -->
     <string id="32201">[B]Wanneer moeten bekeken videos verwijderd worden?[/B]</string>
