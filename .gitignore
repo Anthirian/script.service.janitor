@@ -1,3 +1,6 @@
 /.idea
 *.db
 *.py[co]
+.project
+.pydevproject
+.settings
