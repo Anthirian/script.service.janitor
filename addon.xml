@@ -3,7 +3,7 @@
     <requires>
         <import addon="xbmc.python" version="2.14.0" />
         <import addon="xbmc.json" version="6.6.0" />
-        <import addon="xbmc.gui" version="5.0.1" />
+        <import addon="xbmc.gui" version="5.3.0" />
     </requires>
     <extension point="xbmc.python.script" library="default.py" />
     <extension point="xbmc.service" library="service.py" start="login" />
