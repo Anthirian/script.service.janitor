@@ -410,6 +410,28 @@ class Cleaner(object):
                 break
         return title
 
+    def xbmcvfs_delete(self, file):
+        if xbmcvfs.delete(file):
+            return True
+        else:
+            # remove readonly flag
+            if os.name == 'nt':
+                os.chmod( file.decode( 'utf-8' ), 0o0200 )
+                return bool(xbmcvfs.delete(file))
+            else:
+                return False
+
+    def xbmcvfs_rmdir(self, dir):
+        if xbmcvfs.rmdir(dir):
+            return True
+        else:
+            # remove readonly flag
+            if os.name == 'nt':
+                os.chmod( dir.decode( 'utf-8' ), 0o0200 )
+                return bool(xbmcvfs.rmdir(dir))
+            else:
+                return False
+
     def delete_file(self, location):
         """
         Delete a file from the file system. Also supports stacked movie files.
@@ -429,7 +451,7 @@ class Cleaner(object):
 
         for p in paths:
             if xbmcvfs.exists(p):
-                success.append(bool(xbmcvfs.delete(p)))
+                success.append(self.xbmcvfs_delete(p))
             else:
                 debug("File {0!r} no longer exists.".format(p), xbmc.LOGERROR)
                 success.append(False)
@@ -486,10 +508,10 @@ class Cleaner(object):
                 # Delete any files in the current folder
                 for f in files:
                     debug("Deleting file at " + str(os.path.join(folder, f)))
-                    xbmcvfs.delete(os.path.join(folder, f))
+                    self.xbmcvfs_delete(os.path.join(folder, f))
 
                 # Finally delete the current folder
-                return xbmcvfs.rmdir(folder)
+                return self.xbmcvfs_rmdir(folder)
             except OSError as oe:
                 debug("An exception occurred while deleting folders. Errno " + str(oe.errno), xbmc.LOGERROR)
                 return False
@@ -534,7 +556,7 @@ class Cleaner(object):
                     if get_setting(cleaning_type) == self.CLEANING_TYPE_DELETE:
                         if extra_file_path not in path_list:
                             debug("Deleting {0!r}.".format(extra_file_path))
-                            xbmcvfs.delete(extra_file_path)
+                            self.xbmcvfs_delete(extra_file_path)
                     elif get_setting(cleaning_type) == self.CLEANING_TYPE_MOVE:
                         new_extra_path = os.path.join(dest_folder, os.path.basename(extra_file))
                         if new_extra_path not in path_list:
