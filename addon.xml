@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.service.janitor" name="Janitor" version="4.3.1" provider-name="Anthirian, drewzh">
+<addon id="script.service.janitor" name="Janitor" version="4.3.2" provider-name="Anthirian, drewzh">
     <requires>
         <import addon="xbmc.python" version="2.25.0" />
         <import addon="xbmc.json" version="7.0.0" />
@@ -36,6 +36,9 @@ Deze addon kan in een keer je hele videocollectie verwijderen! Zorg dat je preci
         <website/>
         <email/>
         <news>
+[B][I]Version 4.3.2[/I][/B]
+- [FIX] Fixing some exclusions that prevented cleaning.
+- [FIX] Fix metadata
 [B][I]Version 4.3.1[/I][/B]
 - [FIX] Better unicode support
 - [FIX] Obey all exclusions
