@@ -15,7 +15,7 @@
         <setting label="32111" id="clean_movies" type="bool" default="false" visible="true" />
         <setting label="32112" id="clean_tv_shows" type="bool" default="false" visible="true" />
         <setting label="32113" id="clean_music_videos" type="bool" default="false" visible="true" />
-
+        
         <setting label="32114" id="clean_kodi_library" type="bool" default="true" visible="true" />
         <setting label="32115" id="delete_folders" type="bool" default="false" visible="true" />
         <setting label="32116" id="ignore_extensions" type="text" default=".nfo, .nfo-orig, .tbn, .srt, .ass, .srr, .sfv, .nzb, .jpg, .png, .txt" subsetting="true" visible="eq(-1,true)" />
@@ -29,11 +29,12 @@
         <setting type="sep" />
 
         <setting label="32202" id="service_enabled" type="bool" default="false" visible="true" />
+        <setting label="32206" id="instant_enabled" type="bool" default="false" visible="eq(-1,true)" />
 
-        <setting label="32203" id="delayed_start" type="slider" default="0" range="0,10,120" option="int" visible="eq(-1,true)" />
-        <setting label="32204" id="scan_interval" type="slider" default="30" range="15,15,1440" option="int" visible="eq(-2,true)" />
+        <setting label="32203" id="delayed_start" type="slider" default="0" range="0,10,120" option="int" visible="eq(-1,false)" />
+        <setting label="32204" id="scan_interval" type="slider" default="30" range="15,15,1440" option="int" visible="eq(-2,false)" />
 
-        <setting label="32205" id="clean_when_idle" type="bool" default="false" visible="eq(-3,true)" />
+        <setting label="32205" id="clean_when_idle" type="bool" default="false" visible="eq(-3,false)" />
     </category>
 
     <!-- Conditions section -->
@@ -41,7 +42,7 @@
         <setting type="sep" />
         <setting label="32301" type="lsep" />
         <setting type="sep" />
-
+        
         <setting label="32302" id="enable_expiration" type="bool" default="false" visible="true" />
         <setting label="32303" id="expire_after" type="slider" default="7" option="int" range="1,1,30" subsetting="true" visible="eq(-1,true)" />
 
