@@ -147,10 +147,10 @@ class Cleaner(object):
             for filename, title in expired_videos:
                 if not self.__is_canceled():
                     unstacked_path = self.unstack(filename)
-                    if xbmcvfs.exists(unstacked_path[0]) and self.has_no_hard_links(filename):
-                        if get_setting(cleaning_type) == self.CLEANING_TYPE_MOVE:
+                    if xbmcvfs.exists(unstacked_path[0]) and self.has_no_hard_links(filename,video_type):
+                        if get_setting(cleaning_type, video_type) == self.CLEANING_TYPE_MOVE:
                             # No destination set, prompt user to set one now
-                            if get_setting(holding_folder) == "":
+                            if get_setting(holding_folder, video_type) == "":
                                 if xbmcgui.Dialog().yesno(ADDON_NAME, *map(translate, (32521, 32522, 32523))):
                                     xbmc.executebuiltin("Addon.OpenSettings({0!s})".format(ADDON_ID))
                                 self.exit_status = self.STATUS_ABORTED
@@ -174,7 +174,7 @@ class Cleaner(object):
                             elif move_result == -1:
                                 debug("Moving errors occurred. Skipping related files and directories.", xbmc.LOGWARNING)
                                 xbmcgui.Dialog().ok(*map(translate, (32611, 32612, 32613, 32614)))
-                        elif get_setting(cleaning_type) == self.CLEANING_TYPE_DELETE:
+                        elif get_setting(cleaning_type,video_type) == self.CLEANING_TYPE_DELETE:
                             if self.delete_file(filename):
                                 debug("File(s) deleted successfully.")
                                 count += 1
@@ -290,8 +290,8 @@ class Cleaner(object):
         # A non-exhaustive list of pre-defined filters to use during JSON-RPC requests
         # These are possible conditions that must be met before a video can be deleted
         by_playcount = {"field": "playcount", "operator": "greaterthan", "value": "0"}
-        by_date_played = {"field": "lastplayed", "operator": "notinthelast", "value": "{0:f}".format(get_setting(expire_after))}
-        by_minimum_rating = {"field": "rating", "operator": "lessthan", "value": "{0:f}".format(get_setting(minimum_rating))}
+        by_date_played = {"field": "lastplayed", "operator": "notinthelast", "value": "{0:f}".format(get_setting(expire_after,option))}
+        by_minimum_rating = {"field": "rating", "operator": "lessthan", "value": "{0:f}".format(get_setting(minimum_rating,option))}
         by_no_rating = {"field": "rating", "operator": "isnot", "value": "0"}
         by_progress = {"field": "inprogress", "operator": "false", "value": ""}
         by_exclusion1 = {"field": "path", "operator": "doesnotcontain", "value": get_setting(exclusion1)}
@@ -302,9 +302,9 @@ class Cleaner(object):
 
         # link settings and filters together
         settings_and_filters = [
-            (get_setting(enable_expiration), by_date_played),
-            (get_setting(clean_when_low_rated), by_minimum_rating),
-            (get_setting(not_in_progress), by_progress),
+            (get_setting(enable_expiration,option), by_date_played),
+            (get_setting(clean_when_low_rated,option), by_minimum_rating),
+            (get_setting(not_in_progress,option), by_progress),
             (get_setting(exclusion_enabled) and get_setting(exclusion1) is not "", by_exclusion1),
             (get_setting(exclusion_enabled) and get_setting(exclusion2) is not "", by_exclusion2),
             (get_setting(exclusion_enabled) and get_setting(exclusion3) is not "", by_exclusion3),
@@ -313,8 +313,8 @@ class Cleaner(object):
         ]
 
         # Only check not rated videos if checking for video ratings at all
-        if get_setting(clean_when_low_rated):
-            settings_and_filters.append((get_setting(ignore_no_rating), by_no_rating))
+        if get_setting(clean_when_low_rated,option):
+            settings_and_filters.append((get_setting(ignore_no_rating,option), by_no_rating))
 
         enabled_filters = [by_playcount]
         for s, f in settings_and_filters:
@@ -619,7 +619,7 @@ class Cleaner(object):
 
         return 1 if len(paths) == files_moved_successfully else -1
 
-    def has_no_hard_links(self, filename):
+    def has_no_hard_links(self, filename, video_type):
         """
         Tests the provided filename for hard links and only returns True if the number of hard links is exactly 1.
 
@@ -628,7 +628,7 @@ class Cleaner(object):
         :return: True if the number of hard links equals 1, False otherwise.
         :rtype: bool
         """
-        if get_setting(keep_hard_linked):
+        if get_setting(keep_hard_linked,video_type):
             debug("Making sure the number of hard links is exactly one.")
             is_hard_linked = all(i == 1 for i in map(xbmcvfs.Stat.st_nlink, map(xbmcvfs.Stat, self.unstack(filename))))
             debug("No hard links detected." if is_hard_linked else "Hard links detected. Skipping.")

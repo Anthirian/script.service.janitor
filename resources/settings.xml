@@ -59,7 +59,48 @@
 
         <setting label="32313" id="keep_hard_linked" type="bool" default="false" visible="true" />
     </category>
+    <!-- Movies section -->
+<category label="32700" id="movies_section">
+    <setting label="32701" id="movies_indiv_settings" type="bool" default="false" visible="true" />
+    <setting label="32105" id="movies_cleaning_type" type="enum" visible="eq(-1,true)" lvalues="32106|32107" />
+    <setting label="32108" id="movies_holding_info" type="lsep" subsetting="true" visible="eq(-1,0)" />
+    <setting label="32302" id="movies_enable_expiration" type="bool" default="false" visible="eq(-3,true)" />
+    <setting label="32303" id="movies_expire_after" type="slider" default="7" option="int" range="1,1,30" subsetting="true" visible="eq(-1,true)" />
 
+    <setting label="32304" id="movies_clean_when_low_rated" type="bool" default="false" visible="eq(-5,true)" />
+    <setting label="32306" id="movies_minimum_rating" type="slider" default="6" option="int" range="1,1,10" subsetting="true" visible="eq(-1,true)" />
+    <setting label="32307" id="movies_ignore_no_rating" type="bool" default="true" subsetting="true" visible="eq(-2,true)" />
+
+    <setting label="32311" id="movies_not_in_progress" type="bool" default="true" visible="eq(-8,true)" />
+    
+    <setting label="32313" id="movies_keep_hard_linked" type="bool" default="false" visible="eq(-9,true)" />
+</category>
+<!-- TV shows section -->
+<category label="32800" id="episodes_section">
+    <setting label="32801" id="episodes_indiv_settings" type="bool" default="false" visible="true" />
+    <setting label="32105" id="episodes_cleaning_type" type="enum" visible="eq(-1,true)" lvalues="32106|32107" />
+    <setting label="32108" id="episodes_holding_info" type="lsep" subsetting="true" visible="eq(-1,0)" />
+    <setting label="32302" id="episodes_enable_expiration" type="bool" default="false" visible="eq(-3,true)" />
+    <setting label="32303" id="episodes_expire_after" type="slider" default="7" option="int" range="1,1,30" subsetting="true" visible="eq(-1,true)" />
+
+    <setting label="32304" id="episodes_clean_when_low_rated" type="bool" default="false" visible="eq(-5,true)" />
+    <setting label="32306" id="episodes_minimum_rating" type="slider" default="6" option="int" range="1,1,10" subsetting="true" visible="eq(-1,true)" />
+    <setting label="32307" id="episodes_ignore_no_rating" type="bool" default="true" subsetting="true" visible="eq(-2,true)" />
+
+    <setting label="32311" id="episodes_not_in_progress" type="bool" default="true" visible="eq(-8,true)" />
+    
+    <setting label="32313" id="episodes_keep_hard_linked" type="bool" default="false" visible="eq(-9,true)" />
+</category>
+    <!-- Music videos section -->
+<category label="32900" id="musicvideos_section">
+    <setting label="32901" id="musicvideos_indiv_settings" type="bool" default="false" visible="true" />
+    <setting label="32105" id="musicvideos_cleaning_type" type="enum" visible="eq(-1,true)" lvalues="32106|32107" />
+    <setting label="32108" id="musicvideos_holding_info" type="lsep" subsetting="true" visible="eq(-1,0)" />
+    <setting label="32302" id="musicvideos_enable_expiration" type="bool" default="false" visible="eq(-3,true)" />
+    <setting label="32303" id="musicvideos_expire_after" type="slider" default="7" option="int" range="1,1,30" subsetting="true" visible="eq(-1,true)" />
+
+    <setting label="32313" id="musicvideos_keep_hard_linked" type="bool" default="false" visible="eq(-5,true)" />
+</category>
     <!-- Exclusions section -->
     <category label="32400" id="exclusions_section">
         <setting type="sep" />
