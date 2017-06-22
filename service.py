@@ -4,7 +4,17 @@
 from default import Cleaner
 from settings import *
 from utils import notify
-from xbmc import log
+import xbmc, xbmcaddon
+import simplejson as json
+
+__addon__        = xbmcaddon.Addon()
+__addonname__    = __addon__.getAddonInfo('name')
+
+def log(txt, loglevel=xbmc.LOGNOTICE):
+    if isinstance (txt,str):
+        txt = txt.decode("utf-8")
+    message = u'%s: %s' % (__addonname__, txt)
+    xbmc.log(msg=message.encode("utf-8"), level=loglevel)
 
 
 def autostart():
@@ -41,5 +51,65 @@ def autostart():
     return
 
 
+    
+class Main:
+    def __init__( self ):
+        log('init main')
+        self._service_setup()
+        while (not xbmc.abortRequested):
+            xbmc.sleep(1000)
+
+    def _service_setup( self ):
+        log('installing service')
+        self.Player = MyPlayer(action = self._service_janitor)
+
+    def _service_janitor( self, video_type, expired_videos ):
+        log('service janitor')
+        # mark as watched
+        log('%s to clean : %s (%s)' % (video_type, expired_videos['title'], expired_videos['filename']),xbmc.LOGNOTICE)
+        try:
+            cleaner = Cleaner()
+            results, _ = cleaner.clean_all(video_type=video_type, expired_videos=expired_videos)
+            # do janitor
+            log(results)
+            notify(results)
+        except:
+            log('failed to do janitor on video %s (filename= %s )' % (expired_videos['filename'],expired_videos['title']), xbmc.LOGNOTICE)
+        
+   
+# monitor notifications
+class MyPlayer(xbmc.Monitor):
+    def __init__( self, *args, **kwargs ):
+        log('Player Class Init')
+        xbmc.Monitor.__init__( self )
+        self.action = kwargs['action']
+        
+    def onNotification( self, sender, method, data ):
+        if sender == 'xbmc':
+            # Replace with next condition to enable clean after marked seen in library
+            
+            # if method == 'Player.OnStop' or method == 'VideoLibrary.OnUpdate':
+            if method == 'Player.OnStop':
+                
+                log('xbmc %s' % method)
+                result = json.loads(data)
+                if method == 'Player.OnStop' or ( method == 'VideoLibrary.OnUpdate' and 'playcount' in result ):
+                    # if viewing in file mode and playback stopped at the end
+                    if 'item' in result and 'title' in result["item"] and result["end"]:
+                        if result['item']['type'] == 'episode' or result['item']['type'] == 'movie' or result['item']['type'] == 'musicvideo':
+                            # mark episode as watched
+                            
+                            xpired_videos = {'filename':result["item"]["file"],'title':result["item"]["title"]}
+                            self.action(result['item']['type'] + 's',expired_videos)
+                    elif method == 'Player.OnStop':
+                        # wait 1s before marking episode
+                        xbmc.sleep(1000)
+
 if __name__ == "__main__":
-    autostart()
+    log('chargement main service')
+    if get_setting(instant_enabled):
+        log('service instant clean')
+        Main()
+    else:
+        log('run once')
+        autostart()
