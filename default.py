@@ -9,6 +9,19 @@ from utils import *
 from viewer import *
 
 
+import xbmc,xbmcaddon
+
+__addon__        = xbmcaddon.Addon()
+__addonname__    = __addon__.getAddonInfo('name')
+
+def log(txt, loglevel=xbmc.LOGNOTICE):
+    if isinstance (txt,str):
+        txt = txt.decode("utf-8")
+    message = u'%s: %s' % (__addonname__, txt)
+    xbmc.log(msg=message.encode("utf-8"), level=loglevel)
+
+
+
 class Cleaner(object):
     """
     The Cleaner class allows users to clean up their movie, TV show and music video collection by removing watched
@@ -102,7 +115,7 @@ class Cleaner(object):
         """
         self.silent = True
 
-    def clean(self, video_type):
+    def clean(self, video_type, **kwargs ):
         """
         Clean all watched videos of the provided type.
 
@@ -111,6 +124,11 @@ class Cleaner(object):
         :rtype: (list, int, int)
         :return: A list of the filenames that were cleaned, as well as the number of files cleaned and the return status.
         """
+        expired_videos=kwargs.get('expired_videos', None)
+        if expired_videos!=None:
+            ImmediateFileClean = True
+        else:
+            ImmediateFileClean = False
         cleaned_files = []
         count = 0
         type_translation = {self.MOVIES: translate(32626), self.MUSIC_VIDEOS: translate(32627), self.TVSHOWS: translate(32628)}
@@ -133,7 +151,8 @@ class Cleaner(object):
         progress_percent = 0
 
         if clean_this_video_type:
-            expired_videos = self.get_expired_videos(video_type)
+            if not ImmediateFileClean:
+                expired_videos = self.get_expired_videos(video_type)
             if not self.silent:
                 amount = len(expired_videos)
                 debug("Found {0} videos that may need cleaning.".format(amount))
@@ -204,7 +223,7 @@ class Cleaner(object):
 
         return cleaned_files, count, self.exit_status
 
-    def clean_all(self):
+    def clean_all(self, **kwargs):
         """
         Clean up any watched videos in the Kodi library, satisfying any conditions set via the addon settings.
 
@@ -212,24 +231,33 @@ class Cleaner(object):
         :return: A single-line (localized) summary of the cleaning results to be used for a notification, plus a status.
         """
         debug("Starting cleaning routine.")
-
+        video_type=kwargs.get('video_type', None)
+        expired_videos=kwargs.get('expired_videos', None)
+        
+        
         if get_setting(clean_when_idle) and xbmc.Player().isPlaying():
             debug("Kodi is currently playing a file. Skipping cleaning.", xbmc.LOGWARNING)
             return None, self.exit_status
 
         results = {}
         cleaning_results, cleaned_files = [], []
-        if not get_setting(clean_when_low_disk_space) or (get_setting(clean_when_low_disk_space) and disk_space_low()):
+        if (expired_videos != none) or (not get_setting(clean_when_low_disk_space) or (get_setting(clean_when_low_disk_space) and disk_space_low())):
             if not self.silent:
                 self.progress.create(ADDON_NAME, *map(translate, (32619, 32615, 32615)))
                 self.progress.update(0)
                 self.monitor.waitForAbort(2)
-            for video_type in [self.MOVIES, self.MUSIC_VIDEOS, self.TVSHOWS]:
-                if not self.__is_canceled():
-                    cleaned_files, count, status = self.clean(video_type)
-                    if count > 0:
-                        cleaning_results.extend(cleaned_files)
-                        results[video_type] = count
+            if expired_videos != none :
+                cleaned_files, count, status = self.clean(video_type,expired_videos)
+                if count > 0:
+                    cleaning_results.extend(cleaned_files)
+                    results[video_type] = count
+            else:
+                for video_type in [self.MOVIES, self.MUSIC_VIDEOS, self.TVSHOWS]:
+                    if not self.__is_canceled():
+                        cleaned_files, count, status = self.clean(video_type)
+                        if count > 0:
+                            cleaning_results.extend(cleaned_files)
+                            results[video_type] = count
             if not self.silent:
                 self.progress.close()
 
@@ -638,6 +666,7 @@ class Cleaner(object):
 
 
 if __name__ == "__main__":
+    log('Main Janitor default2')
     if len(sys.argv) > 1 and sys.argv[1] == "log":
         win = LogViewerDialog("JanitorLogViewer.xml", ADDON.getAddonInfo("path"))
         win.doModal()

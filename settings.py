@@ -6,6 +6,7 @@ from xbmc import translatePath
 
 # Exhaustive list of constants as used by the addon's settings
 service_enabled = "service_enabled"
+instant_enabled = "instant_enabled"
 delete_folders = "delete_folders"
 ignore_extensions = "ignore_extensions"
 
@@ -50,9 +51,6 @@ exclusion3 = "exclusion3"
 exclusion4 = "exclusion4"
 exclusion5 = "exclusion5"
 
-
-
-             
 movies_indiv_settings = "movies_indiv_settings"
 movies_cleaning_type = "movies_cleaning_type"
 movies_holding_folder = "movies_holding_folder"
@@ -89,7 +87,7 @@ musicvideos_expire_after = "musicvideos_expire_after"
 
 musicvideos_keep_hard_linked = "musicvideos_keep_hard_linked"
 
-bools = [service_enabled, delete_folders, clean_related, notifications_enabled, notify_when_idle, debugging_enabled,
+bools = [service_enabled, instant_enabled, delete_folders, clean_related, notifications_enabled, notify_when_idle, debugging_enabled,
          clean_kodi_library, clean_movies, clean_tv_shows, clean_music_videos, clean_when_idle, enable_expiration,
          clean_when_low_rated, ignore_no_rating, clean_when_low_disk_space, create_subdirs,
          not_in_progress, keep_hard_linked, exclusion_enabled]
@@ -153,3 +151,5 @@ def load_all():
     for s in bools + strings + numbers + paths:
         settings[s] = get_setting(s)
     return settings
+
+    
