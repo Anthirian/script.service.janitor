@@ -26,10 +26,20 @@ Deze addon kan in een keer je hele videocollectie verwijderen! Zorg dat je preci
 
 [I]Oorspronkelijk ontwikkeld door Andrew 'drewzh' Higginson (xbmcfilecleaner@drewzh.com)[/I]
         </description>
+        <summary lang="fr_FR">Archive régulièrement les films, séries TV et clips musicaux</summary>
+        <description lang="fr_FR">
+        Cet add-on va scanner automatiquement  votre librairie, pour supprimer ou archiver les films, séries TV et clips musicaux basés sur de nombreux critères comme la date de visionnage, la note, l'espace disque, etc. Toutes ces options peuvent être configurées via les paramètres de l'Addon. Assurez vous de renseigner le bon chemin d'accès pour vérifier l'espace disque, spécialement lorsque vous archivez dans un second disque ou un emplacement réseau. Dans les paramètres vous pouvez accéder à l'historique des vidéos nettoyées.
+
+[B]Attention![/B]
+Cet addon à la faculté de supprimer entièrement votre collection vidéo! Assurez vous de bien comprendre à quoi est destiné cet addon avant d'activer un nettoyage dans les paramètres. Je ne pourrait aucunement être tenu responsable en cas de perte de fichier lié à une mauvaise utilisation.
+
+[I]developé par Andrew 'drewzh' Higginson (xbmcfilecleaner@drewzh.com)[/I]
+        </description>
         <disclaimer lang="en_GB">It is recommended to not delete videos permanently until you are familiar with all of the settings.</disclaimer>
         <disclaimer lang="nl_NL">Het is verstandig om videos pas permanent te verwijderen als je bekend bent met alle instellingen.</disclaimer>
+        <disclaimer lang="fr_FR">Il est recommandé de ne pas supprimer physiquement de vidéos avant de bien maitriser les réglages.</disclaimer>
         <platform>all</platform>
-        <language/>
+        <language>en nl fr</language>
         <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
         <source>https://github.com/Anthirian/script.service.janitor</source>
         <forum>http://forum.kodi.tv/showthread.php?tid=162517</forum>
