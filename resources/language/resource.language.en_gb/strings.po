@@ -429,3 +429,39 @@ msgstr ""
 msgctxt "#32629"
 msgid "[B]Cleaning {type}[/B]"
 msgstr ""
+
+
+
+# Movies section
+# =======================
+
+msgctxt "#32700"
+msgid "Movie conditions"
+msgstr ""
+
+msgctxt "#32701"
+msgid "Use different conditions for movies"
+msgstr ""
+
+# Mucsic Videos section
+# =======================
+
+msgctxt "#32800"
+msgid "Music videos conditions"
+msgstr ""
+
+msgctxt "#32801"
+msgid "Use different conditions for music videos"
+msgstr ""
+
+
+# TV shows section
+# =======================
+
+msgctxt "#32900"
+msgid "TV shows conditions"
+msgstr ""
+
+msgctxt "#32901"
+msgid "Use different conditions for TV shows"
+msgstr ""
