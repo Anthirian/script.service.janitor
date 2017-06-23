@@ -3,6 +3,7 @@
     <requires>
         <import addon="xbmc.python" version="2.25.0" />
         <import addon="xbmc.json" version="7.0.0" />
+        <import addon="script.module.simplejson" version="2.0.10" />
         <import addon="xbmc.gui" version="5.12.0" />
     </requires>
     <extension point="xbmc.python.script" library="default.py" />
