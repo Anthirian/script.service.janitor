@@ -3,6 +3,7 @@
 
 import json
 import sys
+import re
 
 from reset_exclusions import *
 from utils import *
@@ -156,6 +157,7 @@ class Cleaner(object):
                                 self.exit_status = self.STATUS_ABORTED
                                 break
                             if get_setting(create_subdirs):
+                                title = re.sub(r"[\\/:*?\"<>|]+","_", title)
                                 new_path = os.path.join(get_setting(holding_folder).encode("utf-8"),
                                                         title.encode("utf-8"))
                             else:
