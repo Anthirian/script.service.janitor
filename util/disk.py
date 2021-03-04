@@ -2,13 +2,15 @@
 # -*- coding: utf-8 -*-
 
 import os
-from ctypes import *
+from ctypes import *  # used for windll
+from ctypes import c_ulonglong, c_wchar_p, byref
+import re
 
 import xbmc
 import xbmcvfs
 
 from util.logging.kodi import debug, notify, translate
-from util.settings import *
+from util import settings
 
 
 def get_free_disk_space(path):
@@ -30,26 +32,34 @@ def get_free_disk_space(path):
                 debug("We are dealing with network paths")
                 debug(f"Extracting information from share {path}")
 
-                regex = "(?P<type>smb|nfs|afp)://(?:(?P<user>.+):(?P<pass>.+)@)?(?P<host>.+?)/(?P<share>[^\/]+).*$"
+                regex = r"(?P<type>smb|nfs|afp)://(?:(?P<user>.+):(?P<pass>.+)@)?(?P<host>.+?)/(?P<share>[^\/]+).*$"
                 pattern = re.compile(regex, flags=re.I | re.U)
                 match = pattern.match(path)
                 try:
                     share = match.groupdict()
-                    debug(f"Protocol: {share['type']}, User: {share['user']}, Password: {share['pass']}, Host: {share['host']}, Share: {share['share']}")
+                    debug(
+                        f"Protocol: {share['type']}, User: {share['user']}, Password: {share['pass']}, Host: {share['host']}, Share: {share['share']}"
+                    )
                 except KeyError as ke:
                     debug(f"Could not parse {ke} from {path}.", xbmc.LOGERROR)
                     return percentage
 
                 debug("Creating UNC paths so Windows understands the shares")
-                path = os.path.normcase(os.sep + os.sep + share["host"] + os.sep + share["share"])
+                path = os.path.normcase(
+                    os.sep + os.sep + share["host"] + os.sep + share["share"]
+                )
                 debug(f"UNC path: {path}")
-                debug("If checks fail because you need credentials, please mount the share first")
+                debug(
+                    "If checks fail because you need credentials, please mount the share first"
+                )
             else:
                 debug("We are dealing with local paths")
 
             bytes_total = c_ulonglong(0)
             bytes_free = c_ulonglong(0)
-            windll.kernel32.GetDiskFreeSpaceExW(c_wchar_p(path), byref(bytes_free), byref(bytes_total), None)
+            windll.kernel32.GetDiskFreeSpaceExW(
+                c_wchar_p(path), byref(bytes_free), byref(bytes_total), None
+            )
 
             try:
                 percentage = float(bytes_free.value) / float(bytes_total.value) * 100
@@ -90,7 +100,9 @@ def disk_space_low():
     :rtype: bool
     :return: True if disk space is below threshold (set through addon settings), False otherwise.
     """
-    return get_free_disk_space(get_value(disk_space_check_path)) <= get_value(disk_space_threshold)
+    return get_free_disk_space(
+        settings.get_value(settings.disk_space_check_path)
+    ) <= settings.get_value(settings.disk_space_threshold)
 
 
 def split_stack(stacked_path):
@@ -113,9 +125,14 @@ def is_hardlinked(filename):
     :return: True if the number of hard links equals 1, False otherwise.
     :rtype: bool
     """
-    if get_value(keep_hard_linked):
+    if settings.get_value(settings.keep_hard_linked):
         debug("Hard link checks are enabled.")
-        return not all(i == 1 for i in map(xbmcvfs.Stat.st_nlink, map(xbmcvfs.Stat, split_stack(filename))))
+        return not all(
+            i == 1
+            for i in map(
+                xbmcvfs.Stat.st_nlink, map(xbmcvfs.Stat, split_stack(filename))
+            )
+        )
     else:
         debug("Hard link checks are disabled.")
         return False
@@ -147,6 +164,7 @@ def delete_file(location):
 
     return any(success)
 
+
 def move_file(source, dest_folder):
     """Move a file to a new destination. Will create destination if it does not exist.
 
@@ -171,25 +189,36 @@ def move_file(source, dest_folder):
                 if xbmcvfs.mkdirs(dest_folder):
                     debug(f"Created destination {dest_folder}.")
                 else:
-                    debug(f"Destination {dest_folder} could not be created.", xbmc.LOGERROR)
+                    debug(
+                        f"Destination {dest_folder} could not be created.",
+                        xbmc.LOGERROR,
+                    )
                     return False
 
             new_path = os.path.join(dest_folder, os.path.basename(p))
 
             if xbmcvfs.exists(new_path):
-                debug("A file with the same name already exists in the holding folder. Checking file sizes.")
+                debug(
+                    "A file with the same name already exists in the holding folder. Checking file sizes."
+                )
                 existing_file = xbmcvfs.File(new_path)
                 file_to_move = xbmcvfs.File(p)
                 if file_to_move.size() > existing_file.size():
-                    debug("This file is larger than the existing file. Replacing it with this one.")
+                    debug(
+                        "This file is larger than the existing file. Replacing it with this one."
+                    )
                     existing_file.close()
                     file_to_move.close()
-                    if bool(xbmcvfs.delete(new_path) and bool(xbmcvfs.rename(p, new_path))):
+                    if bool(
+                        xbmcvfs.delete(new_path) and bool(xbmcvfs.rename(p, new_path))
+                    ):
                         files_moved_successfully += 1
                     else:
                         return False
                 else:
-                    debug("This file isn't larger than the existing file. Deleting it instead of moving.")
+                    debug(
+                        "This file isn't larger than the existing file. Deleting it instead of moving."
+                    )
                     existing_file.close()
                     file_to_move.close()
                     if bool(xbmcvfs.delete(p)):
@@ -201,15 +230,23 @@ def move_file(source, dest_folder):
                 move_success = bool(xbmcvfs.rename(p, new_path))
                 copy_success, delete_success = False, False
                 if not move_success:
-                    debug("Move failed, falling back to copy and delete.", xbmc.LOGWARNING)
+                    debug(
+                        "Move failed, falling back to copy and delete.", xbmc.LOGWARNING
+                    )
                     copy_success = bool(xbmcvfs.copy(p, new_path))
                     if copy_success:
                         debug("Copied successfully, attempting delete of source file.")
                         delete_success = bool(xbmcvfs.delete(p))
                         if not delete_success:
-                            debug("Could not remove source file. Please remove the file manually.", xbmc.LOGWARNING)
+                            debug(
+                                "Could not remove source file. Please remove the file manually.",
+                                xbmc.LOGWARNING,
+                            )
                     else:
-                        debug("Copying failed, please make sure you have appropriate permissions.", xbmc.LOGFATAL)
+                        debug(
+                            "Copying failed, please make sure you have appropriate permissions.",
+                            xbmc.LOGFATAL,
+                        )
                         return False
 
                 if move_success or (copy_success and delete_success):
@@ -236,7 +273,7 @@ def get_common_prefix(filenames):
     for suffix in ["part", "pt", "cd", "dvd", "disk", "disc"]:
         if prefix.endswith(suffix):
             # Strip stacking indicator and separator
-            prefix = prefix[:-len(suffix)].rstrip("._-")
+            prefix = prefix[: -len(suffix)].rstrip("._-")
             break
     return prefix
 

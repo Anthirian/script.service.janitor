@@ -2,7 +2,7 @@ import xbmc
 from xbmcgui import Dialog
 
 # Prevents circular import problems
-import util.settings
+from util import settings
 from util.addon_info import ADDON, ADDON_NAME, ADDON_ICON
 
 
@@ -35,9 +35,12 @@ def notify(message, duration=5000, image=ADDON_ICON, level=xbmc.LOGDEBUG, sound=
     """
     if message:
         debug(message, level)
-        if (util.settings.get_value(util.settings.notifications_enabled) and not
-                (util.settings.get_value(util.settings.notify_when_idle) and xbmc.Player().isPlaying())):
-            Dialog().notification(ADDON_NAME.encode(), message.encode(), image.encode(), duration, sound)
+        if settings.get_value(settings.notifications_enabled) and not (
+            settings.get_value(settings.notify_when_idle) and xbmc.Player().isPlaying()
+        ):
+            Dialog().notification(
+                ADDON_NAME.encode(), message.encode(), image.encode(), duration, sound
+            )
 
 
 def debug(message, level=xbmc.LOGDEBUG):
@@ -49,6 +52,6 @@ def debug(message, level=xbmc.LOGDEBUG):
     :type level: int
     :param level: (Optional) the log level (supported values are found at xbmc.LOG...)
     """
-    if util.settings.get_value(util.settings.debugging_enabled):
+    if settings.get_value(settings.debugging_enabled):
         for line in message.splitlines():
             xbmc.log(msg=f"{ADDON_NAME}: {line}", level=level)

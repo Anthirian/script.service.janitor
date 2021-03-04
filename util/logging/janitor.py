@@ -46,7 +46,7 @@ class Log(object):
                         debug("Writing new log data")
                         f.write(f"[B][{time.strftime('%d/%m/%Y  -  %H:%M:%S')}][/B]\n")
                         for line in data:
-                            f.write(f" - {line}\n")
+                            f.write(f" - {line.encode('utf-8')}\n")
                         f.write("\n")
 
                         debug("Appending previous log file contents")

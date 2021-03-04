@@ -3,7 +3,7 @@
 
 from default import Janitor
 from util.logging.kodi import notify, debug
-from util.settings import *
+from util import settings
 
 
 def autostart():
@@ -12,14 +12,20 @@ def autostart():
     """
     janitor = Janitor()
 
-    service_sleep = 4  # Lower than 4 causes too much stress on resource limited systems such as RPi
+    service_sleep = (
+        4  # Lower than 4 causes too much stress on resource limited systems such as RPi
+    )
     ticker = 0
     delayed_completed = False
 
     while not janitor.monitor.abortRequested():
-        if get_value(service_enabled):
-            scan_interval_ticker = get_value(scan_interval) * 60 / service_sleep
-            delayed_start_ticker = get_value(delayed_start) * 60 / service_sleep
+        if settings.get_value(settings.service_enabled):
+            scan_interval_ticker = (
+                settings.get_value(settings.scan_interval) * 60 / service_sleep
+            )
+            delayed_start_ticker = (
+                settings.get_value(settings.delayed_start) * 60 / service_sleep
+            )
 
             if delayed_completed and ticker >= scan_interval_ticker:
                 results, _ = janitor.clean()

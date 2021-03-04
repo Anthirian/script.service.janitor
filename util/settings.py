@@ -54,14 +54,45 @@ exclusion3 = "exclusion3"
 exclusion4 = "exclusion4"
 exclusion5 = "exclusion5"
 
-bools = [service_enabled, delete_folders, clean_related, notifications_enabled, notify_when_idle, debugging_enabled,
-         clean_library, clean_movies, clean_tv_shows, clean_music_videos, clean_when_idle, enable_expiration,
-         clean_when_low_rated, ignore_no_rating, clean_when_low_disk_space, create_subdirs,
-         not_in_progress, keep_hard_linked, exclusion_enabled]
+bools = [
+    service_enabled,
+    delete_folders,
+    clean_related,
+    notifications_enabled,
+    notify_when_idle,
+    debugging_enabled,
+    clean_library,
+    clean_movies,
+    clean_tv_shows,
+    clean_music_videos,
+    clean_when_idle,
+    enable_expiration,
+    clean_when_low_rated,
+    ignore_no_rating,
+    clean_when_low_disk_space,
+    create_subdirs,
+    not_in_progress,
+    keep_hard_linked,
+    exclusion_enabled,
+]
 strings = [ignore_extensions, cleaning_type, default_action]
-numbers = [delayed_start, scan_interval, expire_after, minimum_rating, disk_space_threshold]
-paths = [disk_space_check_path, holding_folder, create_subdirs, exclusion1, exclusion2, exclusion3, exclusion4,
-         exclusion5]
+numbers = [
+    delayed_start,
+    scan_interval,
+    expire_after,
+    minimum_rating,
+    disk_space_threshold,
+]
+paths = [
+    disk_space_check_path,
+    holding_folder,
+    create_subdirs,
+    exclusion1,
+    exclusion2,
+    exclusion3,
+    exclusion4,
+    exclusion5,
+]
 
 
 def anonymize_path(path):
@@ -75,7 +106,9 @@ def anonymize_path(path):
         kodi.debug(f"Anonymizing {path}")
         # Look for anything matching a protocol followed by credentials
         # This regex assumes there is no @ in the remainder of the path
-        regex = "^(?P<protocol>smb|nfs|afp|upnp|http|https):\/\/(.+:.+@)?(?P<path>[^@]+?)$"
+        regex = (
+            r"^(?P<protocol>smb|nfs|afp|upnp|http|https):\/\/(.+:.+@)?(?P<path>[^@]+?)$"
+        )
         results = re.match(regex, path, flags=re.I | re.U).groupdict()
 
         # Keep only the protocol and the actual path
@@ -103,7 +136,9 @@ def get_value(setting):
     elif setting in paths:
         return anonymize_path(str(translatePath(ADDON.getSetting(setting))))
     else:
-        raise ValueError(f"Failed loading {setting} value. Type {type(setting)} cannot be handled.")
+        raise ValueError(
+            f"Failed loading {setting} value. Type {type(setting)} cannot be handled."
+        )
 
 
 def reload_preferences():
