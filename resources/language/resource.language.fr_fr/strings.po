@@ -357,7 +357,6 @@ msgctxt "#32614"
 msgid "Please check the log file for details and move the particular files manually."
 msgstr "Merci de vérifier le fichier log pour les détails et déplacer les fichiers manuellement"
 
-
 # Progress dialog translations. Keep the text between brackets as is!
 # All dialogs have three lines we need to fill.
 # One space is required to remove line from previous dialog
@@ -405,3 +404,11 @@ msgstr "séries TV"
 msgctxt "#32629"
 msgid "[B]Cleaning {type}[/B]"
 msgstr "[B]Nettoyage {type}[/B]"
+
+msgctxt "#32630"
+msgid "Done"
+msgstr "Fini"
+
+msgctxt "#32631"
+msgid "Don't forget to save your settings"
+msgstr "N'oubliez pas d'enregistrer vos modifications "

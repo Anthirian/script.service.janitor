@@ -403,3 +403,11 @@ msgstr ""
 msgctxt "#32629"
 msgid "[B]Cleaning {type}[/B]"
 msgstr ""
+
+msgctxt "#32630"
+msgid "Done"
+msgstr ""
+
+msgctxt "#32631"
+msgid "Don't forget to save your settings"
+msgstr "N'oubliez pas d'enregistrer vos modifications "

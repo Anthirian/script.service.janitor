@@ -403,3 +403,11 @@ msgstr "afleveringen"
 msgctxt "#32629"
 msgid "[B]Cleaning {type}[/B]"
 msgstr "[B]{type} opschonen[/B]"
+
+msgctxt "#32630"
+msgid "Done"
+msgstr "Klaar"
+
+msgctxt "#32631"
+msgid "Don't forget to save your settings"
+msgstr "Vergeet niet je wijzigingen op te slaan"

@@ -400,3 +400,11 @@ msgstr "odcineków"
 msgctxt "#32629"
 msgid "[B]Cleaning {type}[/B]"
 msgstr "[B]Czyszczenie {type}[/B]"
+
+msgctxt "#32630"
+msgid "Done"
+msgstr "Zrobione"
+
+msgctxt "#32631"
+msgid "Don't forget to save your settings"
+msgstr "Nie zapomnij zapisać zmian"
