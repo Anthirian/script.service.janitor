@@ -319,8 +319,7 @@ class Janitor(object):
                 return cleaned_files
             else:
                 debug("Moving errors occurred. Skipping related files and directories.", xbmc.LOGWARNING)
-                # TODO: Fix this dialog now that the first line can span multiple lines
-                Dialog().ok(*map(translate, (32611, 32612, 32613, 32614)))
+                Dialog().ok(translate(32611), translate(32612))
                 self.exit_status = self.STATUS_FAILURE
                 return cleaned_files
         elif get_value(cleaning_type) == self.CLEANING_TYPE_DELETE:

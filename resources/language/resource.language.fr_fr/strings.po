@@ -343,19 +343,11 @@ msgstr "Vous allez réinitiliser toutes les exclusions paramétrées"
 
 msgctxt "#32611"
 msgid "Errors occurred while moving"
-msgstr "une erreur est apparue pendant le déplacement"
+msgstr "Une erreur est apparue pendant le déplacement"
 
 msgctxt "#32612"
-msgid "Not all files could be moved to the holding folder."
-msgstr "Tous les fichiers ne peuvent être déplacés dans le dossier de sauvegarde"
-
-msgctxt "#32613"
-msgid "Ensure you have appropriate permissions and try again."
-msgstr "Assurez-vous d'avoir les droits sur le répertoire puis reessayez"
-
-msgctxt "#32614"
-msgid "Please check the log file for details and move the particular files manually."
-msgstr "Merci de vérifier le fichier log pour les détails et déplacer les fichiers manuellement"
+msgid "Not all files could be moved to the holding folder. Ensure you have appropriate permissions and try again. Please check the log file for details and move the particular files manually."
+msgstr "Tous les fichiers ne peuvent être déplacés dans le dossier de sauvegarde. Assurez-vous d'avoir les droits sur le répertoire puis reessayez. Merci de vérifier le fichier log pour les détails et déplacer les fichiers manuellement."
 
 # Progress dialog translations. Keep the text between brackets as is!
 # All dialogs have three lines we need to fill.

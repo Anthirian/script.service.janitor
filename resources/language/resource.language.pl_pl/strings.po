@@ -345,16 +345,8 @@ msgid "Errors occurred while moving"
 msgstr "Błedy podczas przenoszenia"
 
 msgctxt "#32612"
-msgid "Not all files could be moved to the holding folder."
-msgstr "Nie wszystkie pliki mogły zostać przeniesione do folderu"
-
-msgctxt "#32613"
-msgid "Ensure you have appropriate permissions and try again."
-msgstr "Upewnij się, że masz odpowiednie uprawnienia i spróbuj ponownie"
-
-msgctxt "#32614"
-msgid "Please check the log file for details and move the particular files manually."
-msgstr "Sprawdź plik log po szczegóły następnie przenieś odpowiednie pliki ręcznie"
+msgid "Not all files could be moved to the holding folder. Ensure you have appropriate permissions and try again. Please check the log file for details and move the particular files manually."
+msgstr "Nie wszystkie pliki mogły zostać przeniesione do folderu. Upewnij się, że masz odpowiednie uprawnienia i spróbuj ponownie. Sprawdź plik log po szczegóły następnie przenieś odpowiednie pliki ręcznie."
 
 # Progress dialog translations. Keep the text between brackets as is! All dialogs have three lines we need to fill.
 msgctxt "#32615"

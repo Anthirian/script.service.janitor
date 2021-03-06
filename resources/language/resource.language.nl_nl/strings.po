@@ -343,19 +343,11 @@ msgstr "Hiermee reset je alle ingestelde uitzonderingen."
 
 msgctxt "#32611"
 msgid "Errors occurred while moving"
-msgstr "Fouten bij het verplaatsen"
+msgstr "Fout bij het verplaatsen"
 
 msgctxt "#32612"
-msgid "Not all files could be moved to the holding folder."
-msgstr "Niet alle bestanden konden worden verplaatst naar de bewaarmap."
-
-msgctxt "#32613"
-msgid "Ensure you have appropriate permissions and try again."
-msgstr "Controleer of je de juiste rechten hebt en probeer het nogmaals."
-
-msgctxt "#32614"
-msgid "Please check the log file for details and move the particular files manually."
-msgstr "Controleer het logbestand voor meer informatie en verplaats de bestanden handmatig."
+msgid "Not all files could be moved to the holding folder. Ensure you have appropriate permissions and try again. Please check the log file for details and move the particular files manually."
+msgstr "Niet alle bestanden konden worden verplaatst naar de bewaarmap. Controleer of je de juiste rechten hebt en probeer het nogmaals. Controleer het logbestand voor meer informatie en verplaats de bestanden handmatig."
 
 # Vertalingen van de voortgangsvensters. Laat de tekst tussen accolades zo staan!
 # Elk venster bevat drie regels om te vullen.

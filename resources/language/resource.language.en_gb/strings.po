@@ -346,17 +346,8 @@ msgid "Errors occurred while moving"
 msgstr ""
 
 msgctxt "#32612"
-msgid "Not all files could be moved to the holding folder."
+msgid "Not all files could be moved to the holding folder. Ensure you have appropriate permissions and try again. Please check the log file for details and move the particular files manually."
 msgstr ""
-
-msgctxt "#32613"
-msgid "Ensure you have appropriate permissions and try again."
-msgstr ""
-
-msgctxt "#32614"
-msgid "Please check the log file for details and move the particular files manually."
-msgstr ""
-
 
 # Progress dialog translations. Keep the text between brackets as is!
 # All dialogs have three lines we need to fill.
