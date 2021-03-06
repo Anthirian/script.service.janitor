@@ -440,7 +440,8 @@ class Janitor(object):
             if xbmc.getCondVisibility("Library.IsScanningVideo"):
                 debug("The video library is being updated. Skipping library cleanup.", xbmc.LOGWARNING)
             else:
-                xbmc.executebuiltin("XBMC.CleanLibrary(video, false)")
+                debug("Starting Kodi library cleaning")
+                xbmc.executebuiltin("CleanLibrary(video)")
         else:
             debug("Cleaning Kodi library not required and/or not enabled.")
 
