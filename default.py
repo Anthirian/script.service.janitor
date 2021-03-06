@@ -314,7 +314,7 @@ class Janitor(object):
                 else:
                     cleaned_files.append(file_name)
                 self.clean_extras(file_name, new_path)
-                self.delete_empty_folders(os.path.dirname(file_name))
+                delete_empty_folders(os.path.dirname(file_name))
                 self.exit_status = self.STATUS_SUCCESS
                 return cleaned_files
             else:
@@ -331,7 +331,7 @@ class Janitor(object):
                 else:
                     cleaned_files.append(file_name)
                 self.clean_extras(file_name)
-                self.delete_empty_folders(os.path.dirname(file_name))
+                delete_empty_folders(os.path.dirname(file_name))
                 self.exit_status = self.STATUS_SUCCESS
             else:
                 debug("Errors occurred during file deletion", xbmc.LOGWARNING)
@@ -471,67 +471,6 @@ class Janitor(object):
 
         # strip the comma and space from the last iteration and add the localized suffix
         return f"{summary.rstrip(', ')}{translate(32518)}" if summary else ""
-
-    def delete_empty_folders(self, location):
-        """
-        Delete the folder if it is empty. Presence of custom file extensions can be ignored while scanning.
-
-        To achieve this, edit the ignored file types setting in the addon settings.
-
-        Example:
-            success = delete_empty_folders(path)
-
-        :type location: unicode
-        :param location: The path to the folder to be deleted.
-        :rtype: bool
-        :return: True if the folder was deleted successfully, False otherwise.
-        """
-        if not get_value(delete_folders):
-            debug("Deleting of empty folders is disabled.")
-            return False
-
-        folder = split_stack(location)[0]  # Stacked paths should have the same parent, use any
-        debug(f"Checking if {folder} is empty")
-        ignored_file_types = [file_ext.strip() for file_ext in get_value(ignore_extensions).split(",")]
-        debug(f"Ignoring file types {ignored_file_types}")
-
-        subfolders, files = xbmcvfs.listdir(folder)
-        debug(f"Contents of {folder}:\nSubfolders: {subfolders}\nFiles: {files}")
-
-        empty = True
-        try:
-            for f in files:
-                _, ext = os.path.splitext(f)
-                if ext and ext not in ignored_file_types:  # ensure f is not a folder and its extension is not ignored
-                    debug(f"Found non-ignored file type {ext}")
-                    empty = False
-                    break
-        except OSError as oe:
-            debug(f"Error deriving file extension. Errno {oe.errno}", xbmc.LOGERROR)
-            empty = False
-
-        # Only delete directories if we found them to be empty (containing no files or filetypes we ignored)
-        if empty:
-            debug("Directory is empty and will be removed")
-            try:
-                # Recursively delete any subfolders
-                for f in subfolders:
-                    debug(f"Deleting file at {os.path.join(folder, f)}")
-                    self.delete_empty_folders(os.path.join(folder, f))
-
-                # Delete any files in the current folder
-                for f in files:
-                    debug(f"Deleting file at {os.path.join(folder, f)}")
-                    xbmcvfs.delete(os.path.join(folder, f))
-
-                # Finally delete the current folder
-                return xbmcvfs.rmdir(folder)
-            except OSError as oe:
-                debug(f"An exception occurred while deleting folders. Errno {oe.errno}", xbmc.LOGERROR)
-                return False
-        else:
-            debug("Directory is not empty and will not be removed")
-            return False
 
     def clean_extras(self, source, dest_folder=None):
         """Clean files related to another file based on the user's preferences.
