@@ -34,7 +34,7 @@ class Log(object):
             debug("Prepending the log file with new data")
             try:
                 debug("Backing up current log")
-                with open(self.logpath, "r") as f:
+                with open(self.logpath, "r", encoding="utf-8") as f:
                     previous_data = f.read()
             except (IOError, OSError, FileNotFoundError) as err:
                 debug(f"{err}", xbmc.LOGERROR)
@@ -42,11 +42,11 @@ class Log(object):
                 previous_data = ""
             finally:
                 try:
-                    with open(self.logpath, "w") as f:
+                    with open(self.logpath, "w", encoding="utf-8") as f:
                         debug("Writing new log data")
                         f.write(f"[B][{time.strftime('%d/%m/%Y  -  %H:%M:%S')}][/B]\n")
                         for line in data:
-                            f.write(f" - {line}\n")
+                            f.write(f" • {line}\n")
                         f.write("\n")
 
                         debug("Appending previous log file contents")
@@ -67,7 +67,7 @@ class Log(object):
         """
         try:
             debug("Trimming log file contents.")
-            with open(self.logpath) as f:
+            with open(self.logpath, encoding="utf-8") as f:
                 debug(f"Saving the top {lines_to_keep} lines.")
                 lines = []
                 for i in range(lines_to_keep):
@@ -77,7 +77,7 @@ class Log(object):
         else:
             try:
                 debug("Removing all log contents.")
-                with open(self.logpath, "w") as f:
+                with open(self.logpath, "w", encoding="utf-8") as f:
                     debug("Restoring saved log contents.")
                     f.writelines(lines)
             except (IOError, OSError) as err:
@@ -94,7 +94,7 @@ class Log(object):
         """
         try:
             debug("Clearing log file contents.")
-            with open(self.logpath, "r+") as f:
+            with open(self.logpath, "r+", encoding="utf-8") as f:
                 f.truncate()
         except (IOError, OSError) as err:
             debug(f"{err}", xbmc.LOGERROR)
@@ -110,7 +110,7 @@ class Log(object):
         """
         try:
             debug("Retrieving log file contents.")
-            with open(self.logpath, "r") as f:
+            with open(self.logpath, "r", encoding="utf-8") as f:
                 contents = f.read()
         except (IOError, OSError) as err:
             debug(f"{err}", xbmc.LOGERROR)
