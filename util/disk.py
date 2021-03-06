@@ -147,6 +147,7 @@ def delete_file(location):
 
     return any(success)
 
+
 def move_file(source, dest_folder):
     """Move a file to a new destination. Will create destination if it does not exist.
 

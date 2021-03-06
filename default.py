@@ -366,15 +366,16 @@ class Janitor(object):
                 break
             else:
                 if file_exists(filename) and not is_hardlinked(filename):
+                    if not self.silent:
+                        file_names = "\n".join(map(os.path.basename, split_stack(filename)))
+                        progress_dialog.update(int(progress_percent), file_names)
+                        self.monitor.waitForAbort(2)
+
                     cleaned_files = self.process_file(filename, title)
                     count += len(cleaned_files)
                 else:
                     debug(f"Not cleaning {filename}. It may have already been removed.", xbmc.LOGWARNING)
 
-                if not self.silent:
-                    file_names = "\n".join(map(os.path.basename, split_stack(filename)))
-                    progress_dialog.update(int(progress_percent), file_names)
-                    self.monitor.waitForAbort(2)
         else:
             if not self.silent:
                 # TODO: Localize this dialog string
