@@ -7,7 +7,7 @@ import time
 import xbmc
 from xbmcgui import Dialog, WindowXMLDialog
 
-from util.addon_info import ADDON_PROFILE
+from util.addon_info import ADDON, ADDON_PROFILE
 from util.logging.kodi import debug, translate
 
 
@@ -145,3 +145,9 @@ class LogViewerDialog(WindowXMLDialog):
                 self.getControl(self.TEXTBOXID).setText(self.log.clear())
         else:
             raise ValueError("Unknown button pressed")
+
+
+def view_log():
+    win = LogViewerDialog("JanitorLogViewer.xml", ADDON.getAddonInfo("path"))
+    win.doModal()
+    del win

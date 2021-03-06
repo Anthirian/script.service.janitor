@@ -9,7 +9,7 @@ from xbmcgui import DialogProgress, Dialog
 from util import exclusions
 from util.addon_info import ADDON_NAME, ADDON_ID
 from util.disk import *
-from util.logging.janitor import LogViewerDialog, Log
+from util.logging.janitor import Log, view_log
 from util.logging.kodi import debug
 from util.settings import *
 
@@ -237,7 +237,7 @@ class Janitor(object):
     CLEANING_TYPE_MOVE = "0"
     CLEANING_TYPE_DELETE = "1"
     DEFAULT_ACTION_CLEAN = "0"
-    DEFAULT_ACTION_LOG = "1"
+    DEFAULT_ACTION_VIEW_LOG = "1"
 
     STATUS_SUCCESS = 1
     STATUS_FAILURE = 2
@@ -576,15 +576,13 @@ class Janitor(object):
 
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "log":
-        win = LogViewerDialog("JanitorLogViewer.xml", ADDON.getAddonInfo("path"))
-        win.doModal()
-        del win
+        view_log()
     elif len(sys.argv) > 1 and sys.argv[1] == "reset":
         exclusions.reset()
     else:
         janitor = Janitor()
-        if get_value(default_action) == janitor.DEFAULT_ACTION_LOG:
-            xbmc.executebuiltin(f"RunScript({ADDON_ID}, log)")
+        if get_value(default_action) == janitor.DEFAULT_ACTION_VIEW_LOG:
+            view_log()
         else:
             janitor.show_progress()
             results, return_status = janitor.clean()
@@ -592,7 +590,7 @@ if __name__ == "__main__":
                 # Videos were cleaned. Ask the user to view the log file.
                 # TODO: Listen to OnCleanFinished notifications and wait before asking to view the log
                 if Dialog().yesno(translate(32514), translate(32519).format(summary=janitor.get_cleaning_results(results))):
-                    xbmc.executebuiltin(f"RunScript({ADDON_ID}, log)")
+                    view_log()
             elif return_status == janitor.STATUS_ABORTED:
                 # Do not show cleaning results in case user aborted, e.g. to set holding folder
                 pass
