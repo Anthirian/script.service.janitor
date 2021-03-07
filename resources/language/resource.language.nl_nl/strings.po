@@ -23,11 +23,11 @@ msgstr "Verwijdert regelmatig oude films, afleveringen van TV-series en videocli
 
 msgctxt "Addon Description"
 msgid "This addon will automatically scan your library for watched movies, TV show episodes and music videos, and delete them from the file system based on numerous critia such as age, rating, free disk space, etc. All these options and more can be configured via the addon's settings. Also make sure you set the correct path to the disk you wish to check for free space, especially when you store your videos on a secondary drive or a network share. Through the settings you can view which videos have been cleaned.\n\nBeware!\nThis addon has the potential to erase your entire video collection! Please make sure you understand exactly what this addon is designed to do before enabling any type of cleaning in the settings. I will not be held responsible for loss of data due to user error.\n\nOriginally developed by Andrew 'drewzh' Higginson (xbmcfilecleaner@drewzh.com)"
-msgstr "Deze addon zal automatisch de videobibliotheek scannen op zoek naar bekeken films, afleveringen van TV-series en videoclips, en deze van de harde schijf verwijderen en daarbij letten op verscheidene criteria, zoals leeftijd, cijfer, vrije harde schijfruimte, etc. Al deze opties, en andere, zijn in te stellen via het optiesmenu van de addon. Let er daarbij ook op dat je het juiste pad instelt naar de schijf die je wil gebruiken voor het controleren van de vrije schijfruimte, met name als je videocollectie op een andere harde schijf staat of op een netwerkshare. Via de instellingen kun je tevens bekijken welke video's er opgeschoond zijn.\n\nWaarschuwing!\nDeze addon kan in een keer je hele videocollectie verwijderen! Zorg dat je precies weet wat deze addon doet voor je voor een type video's het opschonen activeert in de opties. Ik ben niet verantwoordelijk voor verlies van gegevens door handelen van de gebruiker.\n\nOorspronkelijk ontwikkeld door Andrew 'drewzh' Higginson (xbmcfilecleaner@drewzh.com)"
+msgstr "Deze addon zal automatisch de videobibliotheek scannen op zoek naar bekeken films, afleveringen van TV-series en videoclips, en deze van de harde schijf verwijderen en daarbij letten op verscheidene criteria, zoals leeftijd, cijfer, vrije harde schijfruimte, etc. Al deze opties, en andere, zijn in te stellen via het optiesmenu van de addon. Let er daarbij ook op dat u het juiste pad instelt naar de schijf die u wilt gebruiken voor het controleren van de vrije schijfruimte, met name als uw videocollectie op een andere harde schijf staat of op een netwerkshare. Via de instellingen kunt u tevens bekijken welke video's er opgeschoond zijn.\n\nWaarschuwing!\nDeze addon kan in een keer uw hele videocollectie verwijderen! Zorg dat u precies weet wat deze addon doet voor u voor een type video's het opschonen activeert in de opties. Ik ben niet verantwoordelijk voor verlies van gegevens door handelen van de gebruiker.\n\nOorspronkelijk ontwikkeld door Andrew 'drewzh' Higginson (xbmcfilecleaner@drewzh.com)"
 
 msgctxt "Addon Disclaimer"
 msgid "It is recommended to not delete videos permanently until you are familiar with all of the settings."
-msgstr "Het is verstandig om videos pas permanent te verwijderen als je bekend bent met alle instellingen."
+msgstr "Het is verstandig om videos pas permanent te verwijderen als u bekend bent met alle instellingen."
 
 
 # Actiestabblad
@@ -38,7 +38,7 @@ msgstr "Acties"
 
 msgctxt "#32101"
 msgid "[B]Which videos do you want to clean?[/B]"
-msgstr "[B]Welke video's wil je opschonen?[/B]"
+msgstr "[B]Welke video's wilt u opschonen?[/B]"
 
 msgctxt "#32102"
 msgid "Default action"
@@ -229,7 +229,7 @@ msgstr "Meldingen"
 
 msgctxt "#32501"
 msgid "[B]How much information do you want to get?[/B]"
-msgstr "[B]Hoeveel informatie wil je krijgen?[/B]"
+msgstr "[B]Hoeveel informatie wilt u krijgen?[/B]"
 
 msgctxt "#32502"
 msgid "Show notifications"
@@ -263,34 +263,17 @@ msgctxt "#32514"
 msgid "Cleaning results"
 msgstr "Schoonmaakresultaten"
 
-msgctxt "#32515"
-msgid "movie(s)"
-msgstr "film(s)"
-
-msgctxt "#32516"
-msgid "episode(s)"
-msgstr "aflevering(en)"
-
-msgctxt "#32517"
-msgid "music video(s)"
-msgstr "videoclip(s)"
-
-# Laatste deel van schoonmaakresultaten. Verwijder niet de eerste spatie!
-msgctxt "#32518"
-msgid " were cleaned"
-msgstr " zijn opgeschoond"
-
 msgctxt "#32519"
-msgid "{summary}\nWould you like to view the cleaning log?"
-msgstr "{summary}\nWil je het schoonmaaklogboek bekijken?"
+msgid "Janitor cleaned {amount} video files in accordance with your chosen settings. Would you like to view the cleaning log?"
+msgstr "Janitor heeft {amount} videobestanden opgeschoond in overeenstemming met de door u gekozen instellingen. Wilt u het schoonmaaklogboek bekijken?"
 
 msgctxt "#32520"
 msgid "Cleaning not required. Watch some videos or adjust your settings."
-msgstr "Opschonen niet nodig. Bekijk een video of pas je instellingen aan."
+msgstr "Opschonen niet nodig. Bekijk een video of pas uw instellingen aan."
 
 msgctxt "#32521"
 msgid "The destination folder is not set up."
-msgstr "De doelmap is niet ingesteld. Je moet eerst een bewaarmap kiezen. Wil je dit nu doen?"
+msgstr "De doelmap is niet ingesteld. U moet eerst een bewaarmap kiezen. Wilt u dit nu doen?"
 
 # Tijdelijk, totdat Linux schijfruimtechecks werken
 msgctxt "#32524"
@@ -319,15 +302,15 @@ msgstr "[B]Schoonmaaklogboek[/B]"
 
 msgctxt "#32604"
 msgid "Are you sure?"
-msgstr "Weet je het zeker?"
+msgstr "Weet u het zeker?"
 
 msgctxt "#32605"
 msgid "This will trim the log file, keeping the first 25 lines. This action is irreversible. Do you wish to continue?"
-msgstr "Hiermee kort je het logbestand in tot de bovenste 25 regels. Deze actie is permanent. Wil je doorgaan?"
+msgstr "Hiermee kort u het logbestand in tot de bovenste 25 regels. Deze actie is permanent. Wilt u doorgaan?"
 
 msgctxt "#32606"
 msgid "This will delete the entire contents of the log file. This action is irreversible. Do you wish to continue?"
-msgstr "Hiermee verwijder je de gehele inhoud van het logbestand. Deze actie is permanent. Wil je doorgaan?"
+msgstr "Hiermee verwijdert u de gehele inhoud van het logbestand. Deze actie is permanent. Wilt u doorgaan?"
 
 msgctxt "#32608"
 msgid "Trim"
@@ -339,7 +322,7 @@ msgstr "Wissen"
 
 msgctxt "#32610"
 msgid "This will reset any exclusions you have set up."
-msgstr "Hiermee reset je alle ingestelde uitzonderingen."
+msgstr "Hiermee reset u alle ingestelde uitzonderingen."
 
 msgctxt "#32611"
 msgid "Errors occurred while moving"
@@ -347,7 +330,7 @@ msgstr "Fout bij het verplaatsen"
 
 msgctxt "#32612"
 msgid "Not all files could be moved to the holding folder. Ensure you have appropriate permissions and try again. Please check the log file for details and move the particular files manually."
-msgstr "Niet alle bestanden konden worden verplaatst naar de bewaarmap. Controleer of je de juiste rechten hebt en probeer het nogmaals. Controleer het logbestand voor meer informatie en verplaats de bestanden handmatig."
+msgstr "Niet alle bestanden konden worden verplaatst naar de bewaarmap. Controleer of u de juiste rechten heeft en probeer het nogmaals. Controleer het logbestand voor meer informatie en verplaats de bestanden handmatig."
 
 # Vertalingen van de voortgangsvensters. Laat de tekst tussen accolades zo staan!
 # Elk venster bevat drie regels om te vullen.
@@ -372,7 +355,7 @@ msgstr "Opschonen wordt gestart."
 # No videos match cleaning criteria
 msgctxt "#32621"
 msgid "Cleaning not required. Watch some videos or adjust your settings."
-msgstr "Opschonen niet nodig. Bekijk een video of pas je instellingen aan."
+msgstr "Opschonen niet nodig. Bekijk een video of pas uw instellingen aan."
 
 # Cleaning of this video type is not enabled
 msgctxt "#32624"
@@ -402,4 +385,4 @@ msgstr "Klaar"
 
 msgctxt "#32631"
 msgid "Don't forget to save your settings"
-msgstr "Vergeet niet je wijzigingen op te slaan"
+msgstr "Vergeet niet uw wijzigingen op te slaan"

@@ -263,26 +263,9 @@ msgctxt "#32514"
 msgid "Cleaning results"
 msgstr "Wynik czyszczenia"
 
-msgctxt "#32515"
-msgid "movie(s)"
-msgstr "film(-ów)"
-
-msgctxt "#32516"
-msgid "episode(s)"
-msgstr "odcinek(-ów)"
-
-msgctxt "#32517"
-msgid "music video(s)"
-msgstr "teledysk(-ów)"
-
-# Suffix for cleaning results. Do not remove the single leading whitespace!
-msgctxt "#32518"
-msgid " were cleaned"
-msgstr " zostało wyczyszczonych"
-
 msgctxt "#32519"
-msgid "{summary}\nWould you like to view the cleaning log?"
-msgstr "{summary}\nChcesz wyświetlić dziennik czyszczenia?"
+msgid "Janitor cleaned {amount} video files in accordance with your chosen settings. Would you like to view the cleaning log?"
+msgstr "Janitor wyczyścił {amount} plików wideo zgodnie z wybranymi ustawieniami. Chcesz wyświetlić dziennik czyszczenia?"
 
 msgctxt "#32520"
 msgid "Cleaning not required. Watch some videos or adjust your settings."

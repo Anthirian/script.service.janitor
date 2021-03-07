@@ -390,7 +390,6 @@ class Janitor(object):
             debug("Kodi is currently playing a file. Skipping cleaning.", xbmc.LOGWARNING)
             return None, self.exit_status
 
-        results = {}
         cleaning_results = []
 
         if not get_value(clean_when_low_disk_space) or (get_value(clean_when_low_disk_space) and disk_space_low()):
@@ -407,9 +406,7 @@ class Janitor(object):
                         break
                     else:
                         cleaned_files, status = self.clean_category(video_type, progress)
-                        if len(cleaned_files):
-                            cleaning_results.extend(cleaned_files)
-                            results[video_type] = len(cleaned_files)
+                        cleaning_results.extend(cleaned_files)
                         if not self.silent:
                             progress.close()
                 else:
@@ -420,7 +417,7 @@ class Janitor(object):
 
         Log().prepend(cleaning_results)
 
-        return results, self.exit_status
+        return cleaning_results, self.exit_status
 
     def clean_library(self, purged_files):
         # Check if we need to perform any post-cleaning operations
@@ -434,33 +431,6 @@ class Janitor(object):
                 xbmc.executebuiltin("CleanLibrary(video)")
         else:
             debug("Cleaning Kodi library not required and/or not enabled.")
-
-    @staticmethod
-    def get_cleaning_results(details):
-        """
-        Create a summary from the cleaning results.
-
-        :type details: dict
-        :rtype: unicode
-        :return: A comma separated summary of the cleaning results.
-        """
-        summary = ""
-
-        # Localize video types
-        for vid_type, amount in details.items():
-            if vid_type is MOVIES:
-                video_type = translate(32515)
-            elif vid_type is TVSHOWS:
-                video_type = translate(32516)
-            elif vid_type is MUSIC_VIDEOS:
-                video_type = translate(32517)
-            else:
-                video_type = ""
-
-            summary += f"{amount:d} {video_type}, "
-
-        # strip the comma and space from the last iteration and add the localized suffix
-        return f"{summary.rstrip(', ')}{translate(32518)}" if summary else ""
 
     def clean_extras(self, source, dest_folder=None):
         """Clean files related to another file based on the user's preferences.
@@ -515,10 +485,10 @@ if __name__ == "__main__":
         else:
             janitor.show_progress()
             results, return_status = janitor.clean()
-            if any(results.values()):
+            if results:
                 # Videos were cleaned. Ask the user to view the log file.
                 # TODO: Listen to OnCleanFinished notifications and wait before asking to view the log
-                if Dialog().yesno(translate(32514), translate(32519).format(summary=janitor.get_cleaning_results(results))):
+                if Dialog().yesno(translate(32514), translate(32519).format(amount=len(results))):
                     view_log()
             elif return_status == janitor.STATUS_ABORTED:
                 # Do not show cleaning results in case user aborted, e.g. to set holding folder

@@ -263,25 +263,8 @@ msgctxt "#32514"
 msgid "Cleaning results"
 msgstr ""
 
-msgctxt "#32515"
-msgid "movie(s)"
-msgstr ""
-
-msgctxt "#32516"
-msgid "episode(s)"
-msgstr ""
-
-msgctxt "#32517"
-msgid "music video(s)"
-msgstr ""
-
-# Suffix for cleaning results. Do not remove the single leading whitespace!
-msgctxt "#32518"
-msgid " were cleaned"
-msgstr ""
-
 msgctxt "#32519"
-msgid "{summary}\nWould you like to view the cleaning log?"
+msgid "Janitor cleaned {amount} video files in accordance with your chosen settings. Would you like to view the cleaning log?"
 msgstr ""
 
 # TODO: change to more general description why cleaning was not performed
