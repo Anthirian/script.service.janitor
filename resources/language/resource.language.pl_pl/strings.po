@@ -337,10 +337,9 @@ msgid " "
 msgstr "" # One space is required to remove line from previous dialog
 
 msgctxt "#32616"
-msgid "[B]{amount}[/B] {type} have expired. Testing for exclusions.\n[I]{title}[/I]"
-msgstr "Wygasło [B]{amount}[/B] {type}. Testowanie wykluczeń.\n[I]{title}[/I]"
+msgid "Finished cleaning {type}"
+msgstr "Zakończone czyszczenie {type}"
 
-msgctxt "#32617
 # Create progress dialog
 msgctxt "#32618"
 msgid "Cleaning {type}"

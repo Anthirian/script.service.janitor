@@ -357,7 +357,8 @@ class Janitor(object):
                 if file_exists(filename) and not is_hardlinked(filename):
                     if not self.silent:
                         file_names = "\n".join(map(os.path.basename, split_stack(filename)))
-                        progress_dialog.update(int(progress_percent), file_names)
+                        heading = translate(32618).format(type=LOCALIZED_VIDEO_TYPES[video_type])
+                        progress_dialog.update(0, f"{heading}\n{file_names}")
                         self.monitor.waitForAbort(2)
 
                     cleaned_files.extend(self.process_file(filename, title))
@@ -366,12 +367,12 @@ class Janitor(object):
 
         else:
             if not self.silent:
-                # TODO: Localize this dialog string
-                progress_dialog.update(100, f"Finished cleaning {LOCALIZED_VIDEO_TYPES[video_type]}")
+                progress_dialog.update(100, translate(32616).format(type=LOCALIZED_VIDEO_TYPES[video_type]))
                 self.monitor.waitForAbort(2)
 
             if self.user_aborted(progress_dialog):
-                # Prevent another dialog from appearing if the user aborts after all of this video_type were already cleaned
+                # Prevent another dialog from appearing if the user aborts
+                # after all of this video_type were already cleaned
                 self.exit_status = self.STATUS_ABORTED
 
         return cleaned_files, self.exit_status
@@ -486,11 +487,9 @@ if __name__ == "__main__":
             results, return_status = janitor.clean()
             if results:
                 # Videos were cleaned. Ask the user to view the log file.
-                # TODO: Listen to OnCleanFinished notifications and wait before asking to view the log
                 if Dialog().yesno(translate(32514), translate(32519).format(amount=len(results))):
                     view_log()
             elif return_status == janitor.STATUS_ABORTED:
-                # Do not show cleaning results in case user aborted, e.g. to set holding folder
-                pass
+                pass  # Do not show cleaning results in case user aborted, e.g. to set holding folder
             else:
                 Dialog().ok(ADDON_NAME, translate(32520))

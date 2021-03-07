@@ -340,7 +340,7 @@ msgid " "
 msgstr ""
 
 msgctxt "#32616"
-msgid "[B]{amount}[/B] {type} have expired. Testing for exclusions.\n[I]{title}[/I]"
+msgid "Finished cleaning {type}"
 msgstr ""
 
 # Create progress dialog
@@ -384,4 +384,4 @@ msgstr ""
 
 msgctxt "#32631"
 msgid "Don't forget to save your settings"
-msgstr "N'oubliez pas d'enregistrer vos modifications "
+msgstr ""

@@ -340,8 +340,8 @@ msgid " "
 msgstr " "
 
 msgctxt "#32616"
-msgid "[B]{amount}[/B] {type} have expired. Testing for exclusions.\n[I]{title}[/I]"
-msgstr "[B]{amount}[/B] {type} zijn verlopen. Controleren op uitzonderingen.\n[I]{title}[/I]"
+msgid "Finished cleaning {type}"
+msgstr "klaar met het schoonmaken van {type}"
 
 # Create progress dialog
 msgctxt "#32618"
