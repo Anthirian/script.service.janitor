@@ -291,7 +291,7 @@ class Janitor(object):
         :return:
         :rtype:
         """
-        count, cleaned_files = 0, []
+        cleaned_files = []
         if get_value(cleaning_type) == self.CLEANING_TYPE_MOVE:
             # No destination set, prompt user to set one now
             if get_value(holding_folder) == "":
@@ -307,12 +307,8 @@ class Janitor(object):
             else:
                 new_path = get_value(holding_folder)
             if move_file(file_name, new_path):
-                debug("File(s) moved successfully.")
-                count += 1
-                if is_stacked_file(file_name) and len(split_stack(file_name)) > 1:
-                    cleaned_files.extend(split_stack(file_name))
-                else:
-                    cleaned_files.append(file_name)
+                debug("File(s) moved successfully")
+                cleaned_files.extend(split_stack(file_name))
                 self.clean_extras(file_name, new_path)
                 delete_empty_folders(os.path.dirname(file_name))
                 self.exit_status = self.STATUS_SUCCESS
@@ -324,12 +320,8 @@ class Janitor(object):
                 return cleaned_files
         elif get_value(cleaning_type) == self.CLEANING_TYPE_DELETE:
             if delete_file(file_name):
-                debug("File(s) deleted successfully.")
-                count += 1
-                if is_stacked_file(file_name) and len(split_stack(file_name)) > 1:
-                    cleaned_files.extend(split_stack(file_name))
-                else:
-                    cleaned_files.append(file_name)
+                debug("File(s) deleted successfully")
+                cleaned_files.extend(split_stack(file_name))
                 self.clean_extras(file_name)
                 delete_empty_folders(os.path.dirname(file_name))
                 self.exit_status = self.STATUS_SUCCESS
