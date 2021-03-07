@@ -345,7 +345,6 @@ class Janitor(object):
 
         # Reset counters
         cleaned_files = []
-        progress_percent = 0
 
         for filename, title in self.db.get_expired_videos(video_type):
             # Check at the beginning of each loop if the user pressed cancel
@@ -361,7 +360,7 @@ class Janitor(object):
                         progress_dialog.update(int(progress_percent), file_names)
                         self.monitor.waitForAbort(2)
 
-                    cleaned_files = self.process_file(filename, title)
+                    cleaned_files.extend(self.process_file(filename, title))
                 else:
                     debug(f"Not cleaning {filename}. It may have already been removed.", xbmc.LOGWARNING)
 
