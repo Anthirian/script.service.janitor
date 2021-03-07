@@ -339,14 +339,13 @@ class Janitor(object):
         :param video_type: The type of videos to clean (one of TVSHOWS, MOVIES, MUSIC_VIDEOS).
         :param progress_dialog: The dialog that is used to display the progress in
         :type progress_dialog: DialogProgress
-        :rtype: (list, int, int)
-        :return: A list of the filenames that were cleaned, as well as the number of files cleaned and the return status.
+        :rtype: (list, int)
+        :return: A list of the filenames that were cleaned and the return status.
         """
 
         # Reset counters
         cleaned_files = []
         progress_percent = 0
-        count = 0
 
         for filename, title in self.db.get_expired_videos(video_type):
             # Check at the beginning of each loop if the user pressed cancel
@@ -363,7 +362,6 @@ class Janitor(object):
                         self.monitor.waitForAbort(2)
 
                     cleaned_files = self.process_file(filename, title)
-                    count += len(cleaned_files)
                 else:
                     debug(f"Not cleaning {filename}. It may have already been removed.", xbmc.LOGWARNING)
 
@@ -377,7 +375,7 @@ class Janitor(object):
                 # Prevent another dialog from appearing if the user aborts after all of this video_type were already cleaned
                 self.exit_status = self.STATUS_ABORTED
 
-        return cleaned_files, count, self.exit_status
+        return cleaned_files, self.exit_status
 
     def clean(self):
         """
@@ -393,7 +391,7 @@ class Janitor(object):
             return None, self.exit_status
 
         results = {}
-        cleaning_results, cleaned_files = [], []
+        cleaning_results = []
 
         if not get_value(clean_when_low_disk_space) or (get_value(clean_when_low_disk_space) and disk_space_low()):
             for video_type in KNOWN_VIDEO_TYPES:
@@ -408,14 +406,14 @@ class Janitor(object):
                         progress.close()
                         break
                     else:
-                        cleaned_files, count, status = self.clean_category(video_type, progress)
-                        if count > 0:
+                        cleaned_files, status = self.clean_category(video_type, progress)
+                        if len(cleaned_files):
                             cleaning_results.extend(cleaned_files)
-                            results[video_type] = count
+                            results[video_type] = len(cleaned_files)
                         if not self.silent:
                             progress.close()
                 else:
-                    debug("User aborted.")
+                    debug("User aborted")
                     break
 
         self.clean_library(cleaning_results)
