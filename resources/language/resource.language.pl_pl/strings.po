@@ -57,8 +57,8 @@ msgid "Cleaning type"
 msgstr "Typ czyszczenia"
 
 msgctxt "#32106"
-msgid "Move elsewhere"
-msgstr "Przenieś gdzie indziej"
+msgid "Recycle"
+msgstr "Przenieść do kosza"
 
 msgctxt "#32107"
 msgid "Delete permanently"
@@ -69,12 +69,12 @@ msgid "[I]Please specify where to store watched videos [/I]"
 msgstr "[I]Wskaż lokalizacje do zapisywania obejrzanych wideo [/I]"
 
 msgctxt "#32109"
-msgid "Holding folder location"
-msgstr "Lokalizacja folderu zawierającego"
+msgid "Recycle bin location"
+msgstr "lokalizacja kosza"
 
 msgctxt "#32110"
-msgid "Create subdirectories (i.e. [B]../Artist[/B], [B]../Movie[/B] and [B]../Show[/B])"
-msgstr "Stwórz pod-foldery (np. [B]../Artist[/B], [B]../Movie[/B] and [B]../Show[/B])"
+msgid "Create subfolders per movie, show and artist"
+msgstr "Twórz podfoldery według filmu, programu i artysty"
 
 msgctxt "#32111"
 msgid "Clean movies"
@@ -202,8 +202,8 @@ msgid "Exclusions"
 msgstr "Wyjątki"
 
 msgctxt "#32401"
-msgid "[B]Which paths must not be touched?[/B]"
-msgstr "[B]Które ścieżki nie mają być ruszane?[/B]"
+msgid "[B]Which folders must not be cleaned?[/B]"
+msgstr "[B]Których folderów nie należy czyścić?[/B]"
 
 msgctxt "#32402"
 msgid "Enable exclusions"
@@ -218,8 +218,8 @@ msgid "Path to exclude"
 msgstr "Ścieżka do wykluczenia"
 
 msgctxt "#32405"
-msgid "Reset exclusions"
-msgstr "Reset wykluczeń"
+msgid "Reset all exclusions"
+msgstr "Zresetuj wszystkie wykluczenia"
 
 # Notifications section
 # =======================
@@ -268,16 +268,16 @@ msgid "Janitor cleaned {amount} video files in accordance with your chosen setti
 msgstr "Janitor wyczyścił {amount} plików wideo zgodnie z wybranymi ustawieniami. Chcesz wyświetlić dziennik czyszczenia?"
 
 msgctxt "#32520"
-msgid "Cleaning not required. Watch some videos or adjust your settings."
-msgstr "Czyszczenie nie jest wymagane. Obejrzyj niektóre filmy lub dostosuj ustawienia."
+msgid "Finished cleaning"
+msgstr "Zakończone czyszczenie"
 
 msgctxt "#32521"
-msgid "The destination folder is not set up."
-msgstr "Folder docelowy nie określony. Musisz najpierw podać folder zawierający. Czy chcesz to zrobić teraz?"
+msgid "The recycle bin is not configured yet and Janitor cannot continue without it. Would you like to configure it now?"
+msgstr "Kosz nie jest jeszcze skonfigurowany i Janitor nie może bez niego działać. Czy chcesz go teraz skonfigurować?"
 
 # Temporary, until Linux remote share disk space checks are supported
 msgctxt "#32524"
-msgid "Remote disk space checking is not supported for your OS yet"
+msgid "Remote disk space checking is not supported for your operating system yet"
 msgstr "Zdalne sprawdzanie pojemności dysku nie jest obsługiwane przez Twój system operacyjny"
 
 # Log section
@@ -328,13 +328,8 @@ msgid "Errors occurred while moving"
 msgstr "Błedy podczas przenoszenia"
 
 msgctxt "#32612"
-msgid "Not all files could be moved to the holding folder. Ensure you have appropriate permissions and try again. Please check the log file for details and move the particular files manually."
-msgstr "Nie wszystkie pliki mogły zostać przeniesione do folderu. Upewnij się, że masz odpowiednie uprawnienia i spróbuj ponownie. Sprawdź plik log po szczegóły następnie przenieś odpowiednie pliki ręcznie."
-
-# Progress dialog translations. Keep the text between brackets as is! All dialogs have three lines we need to fill.
-msgctxt "#32615"
-msgid " "
-msgstr "" # One space is required to remove line from previous dialog
+msgid "Not all files could be moved to the recycle bin. Please check the log file for details and move the particular files manually if necessary."
+msgstr "Nie wszystkie pliki można było przenieść do kosza. Sprawdź plik dziennika, aby uzyskać szczegółowe informacje i w razie potrzeby przenieś poszczególne pliki ręcznie."
 
 msgctxt "#32616"
 msgid "Finished cleaning {type}"
@@ -348,11 +343,6 @@ msgstr "Czyszczenie {type}"
 msgctxt "#32619"
 msgid "Starting cleaning routine."
 msgstr "Rozpoczęcie procedury czyszczenia."
-
-# No videos match cleaning criteria
-msgctxt "#32621"
-msgid "Cleaning not required. Watch some videos or adjust your settings."
-msgstr "Czyszczenie nie jest wymagane. Obejrzyj niektóre filmy lub dostosuj ustawienia."
 
 # Cleaning of this video type is not enabled
 msgctxt "#32624"

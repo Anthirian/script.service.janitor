@@ -57,24 +57,24 @@ msgid "Cleaning type"
 msgstr "Schoonmaaktype"
 
 msgctxt "#32106"
-msgid "Move elsewhere"
-msgstr "Verplaats naar elders"
+msgid "Recycle"
+msgstr "Verplaatsen naar prullenbak"
 
 msgctxt "#32107"
 msgid "Delete permanently"
-msgstr "Verwijder permanent"
+msgstr "Permanent verwijderen"
 
 msgctxt "#32108"
 msgid "[I]Please specify where to store watched videos [/I]"
 msgstr "[I]Selecteer een map waar bekeken video's bewaard worden[/I]"
 
 msgctxt "#32109"
-msgid "Holding folder location"
-msgstr "Locatie bewaarmap"
+msgid "Recycle bin location"
+msgstr "Locatie prullenbak"
 
 msgctxt "#32110"
-msgid "Create subdirectories (i.e. [B]../Artist[/B], [B]../Movie[/B] and [B]../Show[/B])"
-msgstr "Maak submappen aan (bv. [B]../Artiest[/B], [B]../Film[/B] en [B]../Serie[/B])"
+msgid "Create subfolders per movie, show and artist"
+msgstr "Maak submappen per film, show en artiest"
 
 msgctxt "#32111"
 msgid "Clean movies"
@@ -202,8 +202,8 @@ msgid "Exclusions"
 msgstr "Uitzonderingen"
 
 msgctxt "#32401"
-msgid "[B]Which paths must not be touched?[/B]"
-msgstr "[B]Welke bestanden mogen niet opgeschoond worden?[/B]"
+msgid "[B]Which folders must not be cleaned?[/B]"
+msgstr "[B]Welke mappen mogen niet opgeschoond worden?[/B]"
 
 msgctxt "#32402"
 msgid "Enable exclusions"
@@ -218,8 +218,8 @@ msgid "Path to exclude"
 msgstr "Locatie van uitzondering"
 
 msgctxt "#32405"
-msgid "Reset exclusions"
-msgstr "Reset uitzonderingen"
+msgid "Remove all exclusions"
+msgstr "Verwijder alle uitzonderingen"
 
 # Notifications section
 # =======================
@@ -268,16 +268,16 @@ msgid "Janitor cleaned {amount} video files in accordance with your chosen setti
 msgstr "Janitor heeft {amount} videobestanden opgeschoond in overeenstemming met de door u gekozen instellingen. Wilt u het schoonmaaklogboek bekijken?"
 
 msgctxt "#32520"
-msgid "Cleaning not required. Watch some videos or adjust your settings."
-msgstr "Opschonen niet nodig. Bekijk een video of pas uw instellingen aan."
+msgid "Finished cleaning"
+msgstr "Opschonen gereed"
 
 msgctxt "#32521"
-msgid "The destination folder is not set up."
-msgstr "De doelmap is niet ingesteld. U moet eerst een bewaarmap kiezen. Wilt u dit nu doen?"
+msgid "The recycle bin is not configured yet and Janitor cannot continue without it. Would you like to configure it now?"
+msgstr "De prullenbak is nog niet geconfigureerd en Janitor kan niet verder zonder. Wilt u deze nu configureren?"
 
 # Tijdelijk, totdat Linux schijfruimtechecks werken
 msgctxt "#32524"
-msgid "Remote disk space checking is not supported for your OS yet"
+msgid "Remote disk space checking is not supported for your operating system yet"
 msgstr "Schijfruimtecontrole van netwerkschijven is nog niet ondersteund voor dit besturingssysteem"
 
 
@@ -322,22 +322,15 @@ msgstr "Wissen"
 
 msgctxt "#32610"
 msgid "This will reset any exclusions you have set up."
-msgstr "Hiermee reset u alle ingestelde uitzonderingen."
+msgstr "Hiermee verwijdert u alle ingestelde uitzonderingen."
 
 msgctxt "#32611"
 msgid "Errors occurred while moving"
 msgstr "Fout bij het verplaatsen"
 
 msgctxt "#32612"
-msgid "Not all files could be moved to the holding folder. Ensure you have appropriate permissions and try again. Please check the log file for details and move the particular files manually."
-msgstr "Niet alle bestanden konden worden verplaatst naar de bewaarmap. Controleer of u de juiste rechten heeft en probeer het nogmaals. Controleer het logbestand voor meer informatie en verplaats de bestanden handmatig."
-
-# Vertalingen van de voortgangsvensters. Laat de tekst tussen accolades zo staan!
-# Elk venster bevat drie regels om te vullen.
-# Het is verplicht om tenminste een spatie te laten staan om de vorige regel te wissen.
-msgctxt "#32615"
-msgid " "
-msgstr " "
+msgid "Not all files could be moved to the recycle bin. Please check the log file for details and move the particular files manually if necessary."
+msgstr "Niet alle bestanden kunnen naar de prullenbak worden verplaatst. Controleer het logboekbestand voor details en verplaats de specifieke bestanden indien nodig handmatig."
 
 msgctxt "#32616"
 msgid "Finished cleaning {type}"
@@ -351,11 +344,6 @@ msgstr "Opschonen van {type}"
 msgctxt "#32619"
 msgid "Starting cleaning routine."
 msgstr "Opschonen wordt gestart."
-
-# No videos match cleaning criteria
-msgctxt "#32621"
-msgid "Cleaning not required. Watch some videos or adjust your settings."
-msgstr "Opschonen niet nodig. Bekijk een video of pas uw instellingen aan."
 
 # Cleaning of this video type is not enabled
 msgctxt "#32624"

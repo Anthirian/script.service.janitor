@@ -57,7 +57,7 @@ msgid "Cleaning type"
 msgstr ""
 
 msgctxt "#32106"
-msgid "Move elsewhere"
+msgid "Recycle"
 msgstr ""
 
 msgctxt "#32107"
@@ -69,11 +69,11 @@ msgid "[I]Please specify where to store watched videos [/I]"
 msgstr ""
 
 msgctxt "#32109"
-msgid "Holding folder location"
+msgid "Recycle bin location"
 msgstr ""
 
 msgctxt "#32110"
-msgid "Create subdirectories (i.e. [B]../Artist[/B], [B]../Movie[/B] and [B]../Show[/B])"
+msgid "Create subfolders per movie, show and artist"
 msgstr ""
 
 msgctxt "#32111"
@@ -202,7 +202,7 @@ msgid "Exclusions"
 msgstr ""
 
 msgctxt "#32401"
-msgid "[B]Which paths must not be touched?[/B]"
+msgid "[B]Which folders must not be cleaned?[/B]"
 msgstr ""
 
 msgctxt "#32402"
@@ -218,7 +218,7 @@ msgid "Path to exclude"
 msgstr ""
 
 msgctxt "#32405"
-msgid "Reset exclusions"
+msgid "Reset all exclusions"
 msgstr ""
 
 # Notifications section
@@ -267,18 +267,17 @@ msgctxt "#32519"
 msgid "Janitor cleaned {amount} video files in accordance with your chosen settings. Would you like to view the cleaning log?"
 msgstr ""
 
-# TODO: change to more general description why cleaning was not performed
 msgctxt "#32520"
-msgid "Cleaning not required. Watch some videos or adjust your settings."
+msgid "Finished cleaning"
 msgstr ""
 
 msgctxt "#32521"
-msgid "The destination folder is not set up. You must first select a holding folder. Would you like to do this now?"
+msgid "The recycle bin is not configured yet and Janitor cannot continue without it. Would you like to configure it now?"
 msgstr ""
 
 # Temporary, until Linux remote share disk space checks are supported
 msgctxt "#32524"
-msgid "Remote disk space checking is not supported for your OS yet"
+msgid "Remote disk space checking is not supported for your operating system yet."
 msgstr ""
 
 # Log section
@@ -329,14 +328,7 @@ msgid "Errors occurred while moving"
 msgstr ""
 
 msgctxt "#32612"
-msgid "Not all files could be moved to the holding folder. Ensure you have appropriate permissions and try again. Please check the log file for details and move the particular files manually."
-msgstr ""
-
-# Progress dialog translations. Keep the text between brackets as is!
-# All dialogs have three lines we need to fill.
-# One space is required to remove line from previous dialog
-msgctxt "#32615"
-msgid " "
+msgid "Not all files could be moved to the recycle bin. Please check the log file for details and move the particular files manually if necessary."
 msgstr ""
 
 msgctxt "#32616"
@@ -350,11 +342,6 @@ msgstr ""
 
 msgctxt "#32619"
 msgid "Starting cleaning routine."
-msgstr ""
-
-# No videos match cleaning criteria
-msgctxt "#32621"
-msgid "Cleaning not required. Watch some videos or adjust your settings."
 msgstr ""
 
 # Cleaning of this video type is not enabled

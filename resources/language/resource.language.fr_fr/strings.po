@@ -57,8 +57,8 @@ msgid "Cleaning type"
 msgstr "Type de nettoyage"
 
 msgctxt "#32106"
-msgid "Move elsewhere"
-msgstr "Déplacer ailleurs"
+msgid "Recycle"
+msgstr "Mettre à la corbeille"
 
 msgctxt "#32107"
 msgid "Delete permanently"
@@ -69,12 +69,12 @@ msgid "[I]Please specify where to store watched videos [/I]"
 msgstr "[I]Merci de préciser ou vous souhaitez stocker les fichiers vus[/I]"
 
 msgctxt "#32109"
-msgid "Holding folder location"
-msgstr "Emplacement du dossier de sauvegarde"
+msgid "Recycle bin location"
+msgstr "Emplacement de la corbeille"
 
 msgctxt "#32110"
-msgid "Create subdirectories (i.e. [B]../Artist[/B], [B]../Movie[/B] and [B]../Show[/B])"
-msgstr "Créer des sous répertoires (i.e. [B]../Artist[/B], [B]../Movie[/B] and [B]../Show[/B])"
+msgid "Create subfolders per movie, show and artist"
+msgstr "Créez des sous-dossiers par film, émission et artiste"
 
 msgctxt "#32111"
 msgid "Clean movies"
@@ -202,8 +202,8 @@ msgid "Exclusions"
 msgstr "Exclusions"
 
 msgctxt "#32401"
-msgid "[B]Which paths must not be touched?[/B]"
-msgstr "[B]Quels répertoires ne doivent pas être traités?[/B]"
+msgid "[B]Which folders must not be cleaned?[/B]"
+msgstr "[B]Quels dossiers ne doivent pas être nettoyés?[/B]"
 
 msgctxt "#32402"
 msgid "Enable exclusions"
@@ -218,8 +218,8 @@ msgid "Path to exclude"
 msgstr "Chemin à exclure"
 
 msgctxt "#32405"
-msgid "Reset exclusions"
-msgstr "Réinitialiser les exclusions"
+msgid "Reset all exclusions"
+msgstr "Réinitialiser toutes les exclusions"
 
 # Notifications section
 # =======================
@@ -269,16 +269,16 @@ msgstr "Janitor a nettoyé {amount} fichiers vidéo conformément aux paramètre
 
 # TODO: change to more general description why cleaning was not performed
 msgctxt "#32520"
-msgid "Cleaning not required. Watch some videos or adjust your settings."
-msgstr "Nettoyage pas nécessaire. Regardez des vidéos ou modifiez vos paramètres."
+msgid "Finished cleaning"
+msgstr "Nettoyage terminé"
 
 msgctxt "#32521"
 msgid "The destination folder is not set up. You must first select a holding folder. Would you like to do this now?"
-msgstr "Le repertoire de destination n'est pas défini. Vous devez selectionner un repertoire de sauvegarde. Voulez vous lancer maintenant?"
+msgstr "La corbeille n'est pas encore configurée et Janitor ne peut pas continuer sans elle. Souhaitez-vous le configurer maintenant?"
 
 # Temporary, until Linux remote share disk space checks are supported
 msgctxt "#32524"
-msgid "Remote disk space checking is not supported for your OS yet"
+msgid "Remote disk space checking is not supported for your operating system yet"
 msgstr "La recherhce d'espace disque sur les disque réseau n'est pas supporté par votre OS"
 
 # Log section
@@ -329,15 +329,8 @@ msgid "Errors occurred while moving"
 msgstr "Une erreur est apparue pendant le déplacement"
 
 msgctxt "#32612"
-msgid "Not all files could be moved to the holding folder. Ensure you have appropriate permissions and try again. Please check the log file for details and move the particular files manually."
-msgstr "Tous les fichiers ne peuvent être déplacés dans le dossier de sauvegarde. Assurez-vous d'avoir les droits sur le répertoire puis reessayez. Merci de vérifier le fichier log pour les détails et déplacer les fichiers manuellement."
-
-# Progress dialog translations. Keep the text between brackets as is!
-# All dialogs have three lines we need to fill.
-# One space is required to remove line from previous dialog
-msgctxt "#32615"
-msgid " "
-msgstr " "
+msgid "Not all files could be moved to the recycle bin. Please check the log file for details and move the particular files manually if necessary."
+msgstr "Tous les fichiers n'ont pas pu être déplacés vers la corbeille. Veuillez vérifier le fichier journal pour plus de détails et déplacer les fichiers particuliers manuellement si nécessaire."
 
 msgctxt "#32616"
 msgid "Finished cleaning {type}"
@@ -351,11 +344,6 @@ msgstr "Nettoyage {type}"
 msgctxt "#32619"
 msgid "Starting cleaning routine."
 msgstr "Démarrage programme de nettoyage"
-
-# No videos match cleaning criteria
-msgctxt "#32621"
-msgid "Cleaning not required. Watch some videos or adjust your settings."
-msgstr "Nettoyage pas nécessaire. Regardez des vidéos ou modifiez vos paramètres."
 
 # Cleaning of this video type is not enabled
 msgctxt "#32624"

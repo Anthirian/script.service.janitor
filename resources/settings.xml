@@ -7,7 +7,9 @@
         <setting type="sep" />
         <setting label="32102" id="default_action" type="enum" visible="true" lvalues="32103|32104" />
         <setting label="32105" id="cleaning_type" type="enum" visible="true" lvalues="32106|32107" />
+        <!--
         <setting label="32108" id="holding_info" type="lsep" subsetting="true" visible="eq(-1,0)" />
+        -->
 
         <setting label="32109" id="holding_folder" type="folder" default="" option="writeable" subsetting="true" visible="eq(-2,0)" />
         <setting label="32110" id="create_subdirs" type="bool" default="false" subsetting="true" visible="eq(-3,0)" />
@@ -67,13 +69,13 @@
         <setting type="sep" />
 
         <setting label="32402" id="exclusion_enabled" type="bool" default="false" visible="true" />
-        <setting label="32403" type="lsep" subsetting="true" visible="eq(-1,true)" />
-        <setting label="32404" id="exclusion1" type="folder" default="" subsetting="true" visible="eq(-2,true)" />
-        <setting label="32404" id="exclusion2" type="folder" default="" subsetting="true" visible="eq(-3,true)" />
-        <setting label="32404" id="exclusion3" type="folder" default="" subsetting="true" visible="eq(-4,true)" />
-        <setting label="32404" id="exclusion4" type="folder" default="" subsetting="true" visible="eq(-5,true)" />
-        <setting label="32404" id="exclusion5" type="folder" default="" subsetting="true" visible="eq(-6,true)" />
-        <setting label="32405" id="reset_exclusions" type="action" action="RunScript(script.service.janitor, reset)" subsetting="true" visible="eq(-7,true)" />
+        <setting label="32403" type="lsep" visible="true" />
+        <setting label="32404" id="exclusion1" type="folder" default="" subsetting="true" visible="eq(-1,true)" />
+        <setting label="32404" id="exclusion2" type="folder" default="" subsetting="true" visible="eq(-2,true)" />
+        <setting label="32404" id="exclusion3" type="folder" default="" subsetting="true" visible="eq(-3,true)" />
+        <setting label="32404" id="exclusion4" type="folder" default="" subsetting="true" visible="eq(-4,true)" />
+        <setting label="32404" id="exclusion5" type="folder" default="" subsetting="true" visible="eq(-5,true)" />
+        <setting label="32405" id="reset_exclusions" type="action" action="RunScript(script.service.janitor, reset)" subsetting="false" visible="eq(-6,true)" />
     </category>
 
     <!-- Notifications section -->
