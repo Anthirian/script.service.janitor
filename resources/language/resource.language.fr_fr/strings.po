@@ -1,7 +1,7 @@
 # XBMC Media Center language file
 # Addon Name: Janitor
 # Addon id: script.service.janitor
-# Addon version: 4.3.2
+# Addon version: 5.0.0
 # Addon Provider: Anthirian, drewzh
 msgid ""
 msgstr ""
@@ -37,8 +37,8 @@ msgid "Actions"
 msgstr "Actions"
 
 msgctxt "#32101"
-msgid "[B]Which videos do you want to clean?[/B]"
-msgstr "[B]Quel type de vidéos voulez-vous netttoyer ?[/B]"
+msgid "What to clean"
+msgstr "Quoi nettoyer"
 
 msgctxt "#32102"
 msgid "Default action"
@@ -63,10 +63,6 @@ msgstr "Mettre à la corbeille"
 msgctxt "#32107"
 msgid "Delete permanently"
 msgstr "Suppression permanente"
-
-msgctxt "#32108"
-msgid "[I]Please specify where to store watched videos [/I]"
-msgstr "[I]Merci de préciser ou vous souhaitez stocker les fichiers vus[/I]"
 
 msgctxt "#32109"
 msgid "Recycle bin location"
@@ -93,28 +89,31 @@ msgid "Clean Kodi video library afterwards"
 msgstr "Nettoyer la librairie Kodi après traitement"
 
 msgctxt "#32115"
-msgid "Also delete empty folders"
-msgstr "Supprimer aussi les dossier vides"
+msgid "Delete empty folders"
+msgstr "Supprimer les dossier vides"
 
 msgctxt "#32116"
 msgid "Ignore files with the following extensions (separate with commas)"
 msgstr "Ignorer les fichiers avec les extensions suivante (separés par des virgules)"
 
 msgctxt "#32117"
-msgid "Also clean related files with similar names (e.g. subtitles)"
-msgstr "Nettoyer aussi les fichiers avec le même non (e.G. sous titres)"
+msgid "Clean related files with similar names (e.g. subtitles)"
+msgstr "Nettoyer les fichiers avec le même non (e.G. sous titres)"
+
+msgctxt "#32118"
+msgid "How to clean"
+msgstr "Comment nettoyer"
+
+msgctxt "#32119"
+msgid "Additional cleanup"
+msgstr "Nettoyage supplémentaire"
 
 
-
-# Frequency section
+# Automation section
 # =======================
 msgctxt "#32200"
-msgid "Frequency"
-msgstr "Fréquence"
-
-msgctxt "#32201"
-msgid "[B]When should watched videos be cleaned?[/B]"
-msgstr "[B]Quand la vidéo doit être nettoyée ?[/B]"
+msgid "Automation"
+msgstr "Automatisation"
 
 msgctxt "#32202"
 msgid "Run as a service"
@@ -132,20 +131,12 @@ msgctxt "#32205"
 msgid "Do not clean during playback"
 msgstr "Ne pas nettoyer pendant la lecture"
 
-msgctxt "#32206"
-msgid "Start cleaning right after playback stops"
-msgstr "Lancer le nettoyage juste après l'arrêt de la lecture"
-
 
 # Conditions section
 # =======================
 msgctxt "#32300"
 msgid "Conditions"
 msgstr "Conditions"
-
-msgctxt "#32301"
-msgid "[B]Which conditions must be met before a watched video is cleaned?[/B]"
-msgstr "[B]Quelles conditions doivent être remplies avant de nettoyer une video vue?[/B]"
 
 msgctxt "#32302"
 msgid "Wait a certain number of days after watching before cleaning"
@@ -156,15 +147,11 @@ msgid "Days after which a video is considered to have expired"
 msgstr "Nombre de jours à attendre pour que la vidéo puisse être nettoyée"
 
 msgctxt "#32304"
-msgid "Only delete videos with low ratings"
+msgid "Only clean videos with low ratings"
 msgstr "Nettoyer uniquement les videos avec de mauvaises notes"
 
-msgctxt "#32305"
-msgid "[I]Note that music videos do not have ratings and ignore these settings [/I]"
-msgstr "[I]Nota :les clips musicaux n'ont pas de notes, ces réglages ne seront pas pris en compte[/I]"
-
 msgctxt "#32306"
-msgid "Delete a video with a rating lower than"
+msgid "Clean a video with a rating lower than"
 msgstr "Nettoyer une vidéo avec une note inférieure à "
 
 msgctxt "#32307"
@@ -187,13 +174,26 @@ msgctxt "#32311"
 msgid "Do not clean videos that are still in progress"
 msgstr "Ne pas nettoyer les vidéos qui sont ne pas entièrement lues"
 
-msgctxt "#32312"
-msgid "[I]Note that music videos cannot be partially played and will ignore this [/I]"
-msgstr "[I]Nota :les clips musicaux ne peuvent pas être partiellement vus, ces réglages ne seront pas pris en compte[/I]"
-
 msgctxt "#32313"
 msgid "Do not clean videos that have hard links (e.g. seeding torrents)"
 msgstr "Ne pas nettoyer des videos avec des liens actifs (e.g. partage torrent en cours)"
+
+msgctxt "#32342"
+msgid "Time"
+msgstr "Temps"
+
+msgctxt "#32343"
+msgid "Disk space"
+msgstr "Espace disque"
+
+msgctxt "#32344"
+msgid "Rating"
+msgstr "Notation"
+
+msgctxt "#32345"
+msgid "Progress"
+msgstr "Progrès"
+
 
 # Exclusions section
 # ==================
@@ -201,17 +201,9 @@ msgctxt "#32400"
 msgid "Exclusions"
 msgstr "Exclusions"
 
-msgctxt "#32401"
-msgid "[B]Which folders must not be cleaned?[/B]"
-msgstr "[B]Quels dossiers ne doivent pas être nettoyés?[/B]"
-
 msgctxt "#32402"
 msgid "Enable exclusions"
 msgstr "Autoriser les exclusions"
-
-msgctxt "#32403"
-msgid "[I]Use the same type of path (local, NFS, SMB) you use for the library [/I]"
-msgstr "[I]Utilisez le même type d'accès à vos répertoires que ceux présents dans la librairie (local, NFS, SMB)[/I]"
 
 msgctxt "#32404"
 msgid "Path to exclude"
@@ -226,10 +218,6 @@ msgstr "Réinitialiser toutes les exclusions"
 msgctxt "#32500"
 msgid "Notifications"
 msgstr "Notifications"
-
-msgctxt "#32501"
-msgid "[B]How much information do you want to get?[/B]"
-msgstr "[B]Comment voulez vous être averti?[/B]"
 
 msgctxt "#32502"
 msgid "Show notifications"
@@ -271,19 +259,18 @@ msgctxt "#32519"
 msgid "Janitor cleaned {amount} video files in accordance with your chosen settings. Would you like to view the cleaning log?"
 msgstr "Janitor a nettoyé {amount} fichiers vidéo conformément aux paramètres choisis. Voulez vous ouvrir le log de nettoyage?"
 
-# TODO: change to more general description why cleaning was not performed
 msgctxt "#32520"
 msgid "Finished cleaning"
 msgstr "Nettoyage terminé"
 
 msgctxt "#32521"
-msgid "The destination folder is not set up. You must first select a holding folder. Would you like to do this now?"
+msgid "The recycle bin is not configured yet and Janitor cannot continue without it. Would you like to configure it now?"
 msgstr "La corbeille n'est pas encore configurée et Janitor ne peut pas continuer sans elle. Souhaitez-vous le configurer maintenant?"
 
 # Temporary, until Linux remote share disk space checks are supported
 msgctxt "#32524"
-msgid "Remote disk space checking is not supported for your operating system yet"
-msgstr "La recherhce d'espace disque sur les disque réseau n'est pas supporté par votre OS"
+msgid "Remote disk space checking is not supported for your operating system yet."
+msgstr "La recherche d'espace disque sur les disque réseau n'est pas supporté par votre OS"
 
 # Log section
 # =======================
@@ -291,10 +278,6 @@ msgstr "La recherhce d'espace disque sur les disque réseau n'est pas supporté 
 msgctxt "#32600"
 msgid "History"
 msgstr "Historique"
-
-msgctxt "#32601"
-msgid "[B]See which files have been cleaned recently.[/B]"
-msgstr "[B]montre les fihciers récemment nettoyés.[/B]"
 
 msgctxt "#32602"
 msgid "View cleaning history"
@@ -345,16 +328,6 @@ msgctxt "#32618"
 msgid "Cleaning {type}"
 msgstr "Nettoyage {type}"
 
-msgctxt "#32619"
-msgid "Starting cleaning routine."
-msgstr "Démarrage programme de nettoyage"
-
-# Cleaning of this video type is not enabled
-msgctxt "#32624"
-msgid "Cleaning {type} is disabled. Skipping cleaning."
-msgstr "Néttoyage de {type} est désactivé. Annulation nettoyage."
-
-msgctxt "#32625
 msgctxt "#32626"
 msgid "movies"
 msgstr films"
@@ -367,14 +340,10 @@ msgctxt "#32628"
 msgid "episodes"
 msgstr "séries TV"
 
-msgctxt "#32629"
-msgid "[B]Cleaning {type}[/B]"
-msgstr "[B]Nettoyage {type}[/B]"
-
 msgctxt "#32630"
 msgid "Done"
 msgstr "Fini"
 
 msgctxt "#32631"
 msgid "Don't forget to save your settings"
-msgstr "N'oubliez pas d'enregistrer vos modifications "
+msgstr "N'oubliez pas d'enregistrer vos modifications"

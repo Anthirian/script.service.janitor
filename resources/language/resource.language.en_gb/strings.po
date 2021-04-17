@@ -1,7 +1,7 @@
 # XBMC Media Center language file
 # Addon Name: Janitor
 # Addon id: script.service.janitor
-# Addon version: 4.3.0
+# Addon version: 5.0.0
 # Addon Provider: Anthirian, drewzh
 msgid ""
 msgstr ""
@@ -37,7 +37,7 @@ msgid "Actions"
 msgstr ""
 
 msgctxt "#32101"
-msgid "[B]Which videos do you want to clean?[/B]"
+msgid "What to clean"
 msgstr ""
 
 msgctxt "#32102"
@@ -62,10 +62,6 @@ msgstr ""
 
 msgctxt "#32107"
 msgid "Delete permanently"
-msgstr ""
-
-msgctxt "#32108"
-msgid "[I]Please specify where to store watched videos [/I]"
 msgstr ""
 
 msgctxt "#32109"
@@ -93,7 +89,7 @@ msgid "Clean Kodi video library afterwards"
 msgstr ""
 
 msgctxt "#32115"
-msgid "Also delete empty folders"
+msgid "Delete empty folders"
 msgstr ""
 
 msgctxt "#32116"
@@ -101,19 +97,22 @@ msgid "Ignore files with the following extensions (separate with commas)"
 msgstr ""
 
 msgctxt "#32117"
-msgid "Also clean related files with similar names (e.g. subtitles)"
+msgid "Clean related files with similar names (e.g. subtitles)"
+msgstr ""
+
+msgctxt "#32118"
+msgid "How to clean"
+msgstr ""
+
+msgctxt "#32119"
+msgid "Additional cleanup"
 msgstr ""
 
 
-
-# Frequency section
+# Automation section
 # =======================
 msgctxt "#32200"
-msgid "Frequency"
-msgstr ""
-
-msgctxt "#32201"
-msgid "[B]When should watched videos be cleaned?[/B]"
+msgid "Automation"
 msgstr ""
 
 msgctxt "#32202"
@@ -132,19 +131,11 @@ msgctxt "#32205"
 msgid "Do not clean during playback"
 msgstr ""
 
-msgctxt "#32206"
-msgid "Start cleaning right after playback stops"
-msgstr ""
-
 
 # Conditions section
 # =======================
 msgctxt "#32300"
 msgid "Conditions"
-msgstr ""
-
-msgctxt "#32301"
-msgid "[B]Which conditions must be met before a watched video is cleaned?[/B]"
 msgstr ""
 
 msgctxt "#32302"
@@ -156,15 +147,11 @@ msgid "Days after which a video is considered to have expired"
 msgstr ""
 
 msgctxt "#32304"
-msgid "Only delete videos with low ratings"
-msgstr ""
-
-msgctxt "#32305"
-msgid "[I]Note that music videos do not have ratings and ignore these settings [/I]"
+msgid "Only clean videos with low ratings"
 msgstr ""
 
 msgctxt "#32306"
-msgid "Delete a video with a rating lower than"
+msgid "Clean a video with a rating lower than"
 msgstr ""
 
 msgctxt "#32307"
@@ -187,13 +174,26 @@ msgctxt "#32311"
 msgid "Do not clean videos that are still in progress"
 msgstr ""
 
-msgctxt "#32312"
-msgid "[I]Note that music videos cannot be partially played and will ignore this [/I]"
-msgstr ""
-
 msgctxt "#32313"
 msgid "Do not clean videos that have hard links (e.g. seeding torrents)"
 msgstr ""
+
+msgctxt "#32342"
+msgid "Time"
+msgstr ""
+
+msgctxt "#32343"
+msgid "Disk space"
+msgstr ""
+
+msgctxt "#32344"
+msgid "Rating"
+msgstr ""
+
+msgctxt "#32345"
+msgid "Progress"
+msgstr ""
+
 
 # Exclusions section
 # ==================
@@ -201,16 +201,8 @@ msgctxt "#32400"
 msgid "Exclusions"
 msgstr ""
 
-msgctxt "#32401"
-msgid "[B]Which folders must not be cleaned?[/B]"
-msgstr ""
-
 msgctxt "#32402"
 msgid "Enable exclusions"
-msgstr ""
-
-msgctxt "#32403"
-msgid "[I]Use the same type of path (local, NFS, SMB) you use for the library [/I]"
 msgstr ""
 
 msgctxt "#32404"
@@ -225,10 +217,6 @@ msgstr ""
 # =======================
 msgctxt "#32500"
 msgid "Notifications"
-msgstr ""
-
-msgctxt "#32501"
-msgid "[B]How much information do you want to get?[/B]"
 msgstr ""
 
 msgctxt "#32502"
@@ -291,10 +279,6 @@ msgctxt "#32600"
 msgid "History"
 msgstr ""
 
-msgctxt "#32601"
-msgid "[B]See which files have been cleaned recently.[/B]"
-msgstr ""
-
 msgctxt "#32602"
 msgid "View cleaning history"
 msgstr ""
@@ -344,15 +328,6 @@ msgctxt "#32618"
 msgid "Cleaning {type}"
 msgstr ""
 
-msgctxt "#32619"
-msgid "Starting cleaning routine."
-msgstr ""
-
-# Cleaning of this video type is not enabled
-msgctxt "#32624"
-msgid "Cleaning {type} is disabled. Skipping cleaning."
-msgstr ""
-
 msgctxt "#32626"
 msgid "movies"
 msgstr ""
@@ -363,10 +338,6 @@ msgstr ""
 
 msgctxt "#32628"
 msgid "episodes"
-msgstr ""
-
-msgctxt "#32629"
-msgid "[B]Cleaning {type}[/B]"
 msgstr ""
 
 msgctxt "#32630"

@@ -1,7 +1,7 @@
 # XBMC Media Center language file
 # Addon Name: Janitor
 # Addon id: script.service.janitor
-# Addon version: 4.3.0
+# Addon version: 5.0.0
 # Addon Provider: Anthirian, drewzh
 msgid ""
 msgstr ""
@@ -37,8 +37,8 @@ msgid "Actions"
 msgstr "Acties"
 
 msgctxt "#32101"
-msgid "[B]Which videos do you want to clean?[/B]"
-msgstr "[B]Welke video's wilt u opschonen?[/B]"
+msgid "What to clean"
+msgstr "Wat moet opgeschoond worden"
 
 msgctxt "#32102"
 msgid "Default action"
@@ -63,10 +63,6 @@ msgstr "Verplaatsen naar prullenbak"
 msgctxt "#32107"
 msgid "Delete permanently"
 msgstr "Permanent verwijderen"
-
-msgctxt "#32108"
-msgid "[I]Please specify where to store watched videos [/I]"
-msgstr "[I]Selecteer een map waar bekeken video's bewaard worden[/I]"
 
 msgctxt "#32109"
 msgid "Recycle bin location"
@@ -93,28 +89,31 @@ msgid "Clean Kodi video library afterwards"
 msgstr "Kodi videobibliotheek opschonen na afloop"
 
 msgctxt "#32115"
-msgid "Also delete empty folders"
-msgstr "Verwijder tevens lege mappen"
+msgid "Delete empty folders"
+msgstr "Verwijder lege mappen"
 
 msgctxt "#32116"
 msgid "Ignore files with the following extensions (separate with commas)"
 msgstr "Negeer bestanden met de volgende extensies (scheiden met komma's)"
 
 msgctxt "#32117"
-msgid "Also clean related files with similar names (e.g. subtitles)"
-msgstr "Schoon tevens bestanden op met vergelijkbare namen (bv. ondertitels)"
+msgid "Clean related files with similar names (e.g. subtitles)"
+msgstr "Schoon bestanden op met vergelijkbare namen (bv. ondertitels)"
+
+msgctxt "#32118"
+msgid "How to clean"
+msgstr "Hoe moet opgeschoond worden"
+
+msgctxt "#32119"
+msgid "Additional cleanup"
+msgstr ""
 
 
-
-# Frequentietabblad
+# Automation section
 # =======================
 msgctxt "#32200"
-msgid "Frequency"
-msgstr "Frequentie"
-
-msgctxt "#32201"
-msgid "[B]When should watched videos be cleaned?[/B]"
-msgstr "[B]Wanneer moeten bekeken videos opgeschoond worden?[/B]"
+msgid "Automation"
+msgstr "Automatisering"
 
 msgctxt "#32202"
 msgid "Run as a service"
@@ -130,22 +129,14 @@ msgstr "Scan-interval (in minuten)"
 
 msgctxt "#32205"
 msgid "Do not clean during playback"
-msgstr "Schoon niet op als er afgespeeld wordt"
-
-msgctxt "#32206"
-msgid "Start cleaning right after playback stops"
-msgstr "Start opschonen zodra afspelen stopt"
+msgstr ""
 
 
-# Voorwaardentabblad
+# Conditions section
 # =======================
 msgctxt "#32300"
 msgid "Conditions"
 msgstr "Voorwaarden"
-
-msgctxt "#32301"
-msgid "[B]Which conditions must be met before a watched video is cleaned?[/B]"
-msgstr "[B]Aan welke voorwaarden moet een bekeken video voldoen voor hij opgeschoond wordt?[/B]"
 
 msgctxt "#32302"
 msgid "Wait a certain number of days after watching before cleaning"
@@ -158,10 +149,6 @@ msgstr "Aantal dagen waarna een bestand verloopt"
 msgctxt "#32304"
 msgid "Only clean videos with low ratings"
 msgstr "Schoon alleen video's op met een laag cijfer"
-
-msgctxt "#32305"
-msgid "[I]Note that music videos do not have ratings and ignore these settings [/I]"
-msgstr "[I]Let op: videoclips hebben geen cijfers en negeren deze instellingen [/I]"
 
 msgctxt "#32306"
 msgid "Clean a video with a rating lower than"
@@ -187,31 +174,36 @@ msgctxt "#32311"
 msgid "Do not clean videos that are still in progress"
 msgstr "Schoon geen video's op die halverwege gestopt zijn"
 
-msgctxt "#32312"
-msgid "[I]Note that music videos cannot be partially played and will ignore this [/I]"
-msgstr "[I]Videoclips onthouden niet tot hoever ze afgespeeld zijn en negeren dit [/I]"
-
 msgctxt "#32313"
 msgid "Do not clean videos that have hard links (e.g. seeding torrents)"
 msgstr "Schoon geen video's op met hard links (bv. actieve torrents)"
 
-# Uitzonderingentabblad
-# =======================
+msgctxt "#32342"
+msgid "Time"
+msgstr "Tijd"
+
+msgctxt "#32343"
+msgid "Disk space"
+msgstr "Schijfruimte"
+
+msgctxt "#32344"
+msgid "Rating"
+msgstr "Beoordeling"
+
+msgctxt "#32345"
+msgid "Progress"
+msgstr "Voortgang"
+
+
+# Exclusions section
+# ==================
 msgctxt "#32400"
 msgid "Exclusions"
 msgstr "Uitzonderingen"
 
-msgctxt "#32401"
-msgid "[B]Which folders must not be cleaned?[/B]"
-msgstr "[B]Welke mappen mogen niet opgeschoond worden?[/B]"
-
 msgctxt "#32402"
 msgid "Enable exclusions"
 msgstr "Maak een uitzondering"
-
-msgctxt "#32403"
-msgid "[I]Use the same type of path (local, NFS, SMB) you use for the library [/I]"
-msgstr "[I]Gebruik hetzelfde soort paden (lokaal, NFS, SMB) als voor de bibliotheek [I]"
 
 msgctxt "#32404"
 msgid "Path to exclude"
@@ -227,10 +219,6 @@ msgctxt "#32500"
 msgid "Notifications"
 msgstr "Meldingen"
 
-msgctxt "#32501"
-msgid "[B]How much information do you want to get?[/B]"
-msgstr "[B]Hoeveel informatie wilt u krijgen?[/B]"
-
 msgctxt "#32502"
 msgid "Show notifications"
 msgstr "Toon meldingen"
@@ -244,8 +232,8 @@ msgid "Enable debug messages"
 msgstr "Toon debuginformatie"
 
 
-# Vertaalde teksten
-# voor Kodi-meldingen
+# Localization strings
+# for Kodi notifications
 # =======================
 msgctxt "#32511"
 msgid "Error reading hard disk. Please check your settings."
@@ -279,22 +267,17 @@ msgctxt "#32521"
 msgid "The recycle bin is not configured yet and Janitor cannot continue without it. Would you like to configure it now?"
 msgstr "De prullenbak is nog niet geconfigureerd en Janitor kan niet verder zonder. Wilt u deze nu configureren?"
 
-# Tijdelijk, totdat Linux schijfruimtechecks werken
+# Temporary, until Linux remote share disk space checks are supported
 msgctxt "#32524"
-msgid "Remote disk space checking is not supported for your operating system yet"
+msgid "Remote disk space checking is not supported for your operating system yet."
 msgstr "Schijfruimtecontrole van netwerkschijven is nog niet ondersteund voor dit besturingssysteem"
 
-
-# Logtabblad
+# Log section
 # =======================
 
 msgctxt "#32600"
 msgid "History"
 msgstr "Geschiedenis"
-
-msgctxt "#32601"
-msgid "[B]See which files have been cleaned recently.[/B]"
-msgstr "[B]Bekijk welke bestanden onlangs opgeschoond zijn.[/B]"
 
 msgctxt "#32602"
 msgid "View cleaning history"
@@ -345,16 +328,6 @@ msgctxt "#32618"
 msgid "Cleaning {type}"
 msgstr "Opschonen van {type}"
 
-msgctxt "#32619"
-msgid "Starting cleaning routine."
-msgstr "Opschonen wordt gestart."
-
-# Cleaning of this video type is not enabled
-msgctxt "#32624"
-msgid "Cleaning {type} is disabled. Skipping cleaning."
-msgstr "Opschonen van {type} is niet actief. Opschonen wordt overgeslagen."
-
-msgctxt "#32625
 msgctxt "#32626"
 msgid "movies"
 msgstr "films"
@@ -366,10 +339,6 @@ msgstr "videoclips"
 msgctxt "#32628"
 msgid "episodes"
 msgstr "afleveringen"
-
-msgctxt "#32629"
-msgid "[B]Cleaning {type}[/B]"
-msgstr "[B]{type} opschonen[/B]"
 
 msgctxt "#32630"
 msgid "Done"
