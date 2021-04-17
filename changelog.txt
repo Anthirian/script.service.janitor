@@ -1,3 +1,10 @@
+[B][I]Version 5.0.0[/I][/B]
+- [NEW] Completely rewritten Janitor in Python 3 to support Kodi Matrix
+- [NEW] Much improved progress dialogs focusing on showing what matters
+- [NEW] Overhaul settings page to use the new format
+- [FIX] Checking hard links once again works properly
+- [FIX] Improved handling of special characters
+
 [B][I]Version 4.4.1[/I][/B]
 - [FIX] Improved unicode support
 - [FIX] Correctly match excluded paths that contain user credentials

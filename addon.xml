@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.service.janitor" name="Janitor" version="4.4.1" provider-name="Anthirian, drewzh">
+<addon id="script.service.janitor" name="Janitor" version="5.0.0" provider-name="Anthirian, drewzh">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="11.2.0" />
@@ -35,9 +35,19 @@ Cet addon à la faculté de supprimer entièrement votre collection vidéo! Assu
 
 [I]developé par Andrew 'drewzh' Higginson (xbmcfilecleaner@drewzh.com)[/I]
         </description>
+        <summary lang="pl_PL">Regularnie usuwa stare filmy, odcinki programów telewizyjnych i teledyski</summary>
+        <description lang="pl_PL">
+Ten dodatek automatycznie przeskanuje twoją bibliotekę w poszukiwaniu oglądanych filmów, odcinków programów telewizyjnych i teledysków i usunie je z systemu plików na podstawie wielu kryteriów, takich jak wiek, ocena, wolne miejsce na dysku itp. Wszystkie te opcje i więcej można skonfigurować za pomocą ustawienia dodatku. Upewnij się również, że ustawiłeś poprawną ścieżkę do dysku, na którym chcesz sprawdzić wolne miejsce, zwłaszcza gdy przechowujesz filmy na dysku dodatkowym lub w udziale sieciowym. Dzięki ustawieniom możesz zobaczyć, które filmy zostały wyczyszczone.
+
+[B]Uwaga![/B]
+Ten dodatek może wymazać całą Twoją kolekcję wideo! Upewnij się, że dokładnie rozumiesz, do czego ten dodatek jest przeznaczony, zanim włączysz dowolny rodzaj czyszczenia w ustawieniach. [B]Nie[/B] ponoszę odpowiedzialność za utratę danych z powodu błędu użytkownika.
+
+[I]Pierwotnie opracowany przez Andrew „drewzh” Higginsona (xbmcfilecleaner@drewzh.com) [/I]
+        </description>
         <disclaimer lang="en_GB">It is recommended to not delete videos permanently until you are familiar with all of the settings.</disclaimer>
-        <disclaimer lang="nl_NL">Het is verstandig om videos pas permanent te verwijderen als je bekend bent met alle instellingen.</disclaimer>
-        <disclaimer lang="fr_FR">Il est recommandé de ne pas supprimer physiquement de vidéos avant de bien maitriser les réglages.</disclaimer>
+        <disclaimer lang="nl_NL">Het wordt aanbevolen om video's pas definitief te verwijderen als u bekend bent met alle instellingen.</disclaimer>
+        <disclaimer lang="fr_FR">Il est recommandé de ne pas supprimer définitivement les vidéos tant que vous n'êtes pas familiarisé avec tous les paramètres.</disclaimer>
+        <disclaimer lang="pl_PL">Zaleca się, aby nie usuwać filmów na stałe, dopóki nie zapoznasz się ze wszystkimi ustawieniami.</disclaimer>
         <platform>all</platform>
         <license>GNU General Public License v3.0 only</license>
         <source>https://github.com/Anthirian/script.service.janitor</source>
@@ -45,9 +55,12 @@ Cet addon à la faculté de supprimer entièrement votre collection vidéo! Assu
         <website>https://forum.kodi.tv/showthread.php?tid=162517</website>
         <email>anthirian@users.noreply.github.com</email>
         <news>
-[B][I]Version 4.4.1[/I][/B]
-- [FIX] Improved unicode support
-- [FIX] Correctly match excluded paths that contain user credentials
+[B][I]Version 5.0.0[/I][/B]
+- [NEW] Completely rewritten Janitor in Python 3 to support Kodi Matrix
+- [NEW] Much improved progress dialogs focusing on showing what matters
+- [NEW] Overhaul settings page to use the new format
+- [FIX] Checking hard links once again works properly
+- [FIX] Improved handling of special characters
         </news>
         <assets>
             <icon>resources/icon.png</icon>
