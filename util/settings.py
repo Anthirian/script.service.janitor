@@ -40,7 +40,7 @@ clean_when_low_disk_space = "clean_when_low_disk_space"
 disk_space_threshold = "disk_space_threshold"
 disk_space_check_path = "disk_space_check_path"
 
-holding_folder = "holding_folder"
+recycle_bin = "recycle_bin"
 create_subdirs = "create_subdirs"
 
 not_in_progress = "not_in_progress"
@@ -60,7 +60,7 @@ bools = [service_enabled, delete_folders, clean_related, notifications_enabled, 
          not_in_progress, keep_hard_linked, exclusion_enabled]
 strings = [ignore_extensions, cleaning_type, default_action]
 numbers = [delayed_start, scan_interval, expire_after, minimum_rating, disk_space_threshold]
-paths = [disk_space_check_path, holding_folder, create_subdirs, exclusion1, exclusion2, exclusion3, exclusion4,
+paths = [disk_space_check_path, recycle_bin, create_subdirs, exclusion1, exclusion2, exclusion3, exclusion4,
          exclusion5]
 
 

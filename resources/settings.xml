@@ -11,7 +11,7 @@
         <setting label="32108" id="holding_info" type="lsep" subsetting="true" visible="eq(-1,0)" />
         -->
 
-        <setting label="32109" id="holding_folder" type="folder" default="" option="writeable" subsetting="true" visible="eq(-2,0)" />
+        <setting label="32109" id="recycle_bin" type="folder" default="" option="writeable" subsetting="true" visible="eq(-2,0)" />
         <setting label="32110" id="create_subdirs" type="bool" default="false" subsetting="true" visible="eq(-3,0)" />
 
         <setting label="32111" id="clean_movies" type="bool" default="false" visible="true" />

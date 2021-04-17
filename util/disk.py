@@ -121,12 +121,12 @@ def is_hardlinked(filename):
         return False
 
 
-def delete_file(location):
+def delete(location):
     """
     Delete a file from the file system. Also supports stacked movie files.
 
     Example:
-        success = delete_file(location)
+        success = delete(location)
 
     :type location: unicode
     :param location: the path to the file you wish to delete.
@@ -148,11 +148,11 @@ def delete_file(location):
     return any(success)
 
 
-def move_file(source, dest_folder):
+def recycle(source, dest_folder):
     """Move a file to a new destination. Will create destination if it does not exist.
 
     Example:
-        result = move_file(a, b)
+        result = recycle(a, b)
 
     :type source: unicode
     :param source: the source path (absolute)

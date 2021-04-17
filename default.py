@@ -234,7 +234,7 @@ class Janitor(object):
     """
 
     # Constants to ensure correct JSON-RPC requests for Kodi
-    CLEANING_TYPE_MOVE = "0"
+    CLEANING_TYPE_RECYCLE = "0"
     CLEANING_TYPE_DELETE = "1"
     DEFAULT_ACTION_CLEAN = "0"
     DEFAULT_ACTION_VIEW_LOG = "1"
@@ -292,34 +292,32 @@ class Janitor(object):
         :rtype:
         """
         cleaned_files = []
-        if get_value(cleaning_type) == self.CLEANING_TYPE_MOVE:
-            # No destination set, prompt user to set one now
-            if get_value(holding_folder) == "":
+        if get_value(cleaning_type) == self.CLEANING_TYPE_RECYCLE:
+            # Recycle bin not set up, prompt user to set up now
+            if get_value(recycle_bin) == "":
+                self.exit_status = self.STATUS_ABORTED
                 if Dialog().yesno(ADDON_NAME, translate(32521)):
                     xbmc.executebuiltin(f"Addon.OpenSettings({ADDON_ID})")
-                    self.exit_status = self.STATUS_ABORTED
-                else:
-                    self.exit_status = self.STATUS_FAILURE
-                return cleaned_files
+                return []
             if get_value(create_subdirs):
                 title = re.sub(r"[\\/:*?\"<>|]+", "_", title)
-                new_path = os.path.join(get_value(holding_folder), title)
+                new_path = os.path.join(get_value(recycle_bin), title)
             else:
-                new_path = get_value(holding_folder)
-            if move_file(file_name, new_path):
-                debug("File(s) moved successfully")
+                new_path = get_value(recycle_bin)
+            if recycle(file_name, new_path):
+                debug("File(s) recycled successfully")
                 cleaned_files.extend(split_stack(file_name))
                 self.clean_extras(file_name, new_path)
                 delete_empty_folders(os.path.dirname(file_name))
                 self.exit_status = self.STATUS_SUCCESS
                 return cleaned_files
             else:
-                debug("Moving errors occurred. Skipping related files and directories.", xbmc.LOGWARNING)
+                debug("Errors occurred while recycling. Skipping related files and directories.", xbmc.LOGWARNING)
                 Dialog().ok(translate(32611), translate(32612))
                 self.exit_status = self.STATUS_FAILURE
                 return cleaned_files
         elif get_value(cleaning_type) == self.CLEANING_TYPE_DELETE:
-            if delete_file(file_name):
+            if delete(file_name):
                 debug("File(s) deleted successfully")
                 cleaned_files.extend(split_stack(file_name))
                 self.clean_extras(file_name)
@@ -463,7 +461,7 @@ class Janitor(object):
                         if extra_file_path not in path_list:
                             debug(f"Deleting {extra_file_path}.")
                             xbmcvfs.delete(extra_file_path)
-                    elif get_value(cleaning_type) == self.CLEANING_TYPE_MOVE:
+                    elif get_value(cleaning_type) == self.CLEANING_TYPE_RECYCLE:
                         new_extra_path = os.path.join(dest_folder, os.path.basename(extra_file))
                         if new_extra_path not in path_list:
                             debug(f"Moving {extra_file_path} to {new_extra_path}.")
