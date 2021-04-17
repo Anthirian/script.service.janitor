@@ -263,6 +263,10 @@ msgctxt "#32514"
 msgid "Cleaning results"
 msgstr ""
 
+msgctxt "#32518"
+msgid "Janitor cleaned {amount} video files in accordance with your chosen settings"
+msgstr ""
+
 msgctxt "#32519"
 msgid "Janitor cleaned {amount} video files in accordance with your chosen settings. Would you like to view the cleaning log?"
 msgstr ""
