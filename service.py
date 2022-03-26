@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from default import Janitor
+from default import Janitor, ExitStatus
 from util.logging.kodi import notify, debug, translate
 from util.settings import *
 
@@ -23,13 +23,13 @@ def autostart():
 
             if delayed_completed and ticker >= scan_interval_ticker:
                 results, _ = janitor.clean()
-                if results and janitor.exit_status == janitor.STATUS_SUCCESS:
+                if results and janitor.exit_status == ExitStatus.SUCCESS:
                     notify(translate(32518).format(amount=len(results)))
                 ticker = 0
             elif not delayed_completed and ticker >= delayed_start_ticker:
                 delayed_completed = True
                 results, _ = janitor.clean()
-                if results and janitor.exit_status == janitor.STATUS_SUCCESS:
+                if results and janitor.exit_status == ExitStatus.SUCCESS:
                     notify(translate(32518).format(amount=len(results)))
                 ticker = 0
 
