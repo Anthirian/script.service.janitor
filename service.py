@@ -6,7 +6,7 @@ from util.logging.kodi import notify, debug, translate
 from util.settings import *
 
 
-def autostart():
+def autostart() -> None:
     """
     Starts the cleaning service.
     """

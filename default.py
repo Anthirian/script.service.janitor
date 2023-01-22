@@ -7,7 +7,6 @@ from abc import ABC
 from dataclasses import dataclass
 from enum import Enum, auto
 from typing import List
-
 from xbmcgui import DialogProgress, Dialog
 
 from util import exclusions
@@ -208,7 +207,7 @@ class Database:
                     debug("Breaking the loop")
                     break  # Stop looping after the first match for video_type
 
-    def get_video_sources(self, limits=None, sort=None):
+    def get_video_sources(self, limits: dict = None, sort: dict = None) -> dict:
         """
         Retrieve the user configured video sources from Kodi
 
@@ -217,11 +216,8 @@ class Database:
         https://kodi.wiki/view/JSON-RPC_API/
 
         :param limits: The limits to impose on JSON-RPC
-        :type limits: dict
         :param sort: The sorting options for JSON-RPC
-        :type sort: dict
         :return: The user configured video sources
-        :rtype: dict
         """
 
         if sort is None:
@@ -279,14 +275,12 @@ class Janitor:
         debug(f"Running Python: {sys.version}")
         self.db = Database()
 
-    def user_aborted(self, progress_dialog):
+    def user_aborted(self, progress_dialog: DialogProgress) -> bool:
         """
         Test if the progress dialog has been canceled by the user. If the cleaner was started as a service this will
         always return False
 
         :param progress_dialog: The dialog to check for cancellation
-        :type progress_dialog: DialogProgress
-        :rtype: bool
         :return: True if the user cancelled cleaning, False otherwise.
         """
         if self.silent:
@@ -307,15 +301,12 @@ class Janitor:
         """
         self.silent = True
 
-    def process_file(self, file_name, title):
+    def process_file(self, file_name: str, title: str) -> list:
         """Handle the cleaning of a video file, either via deletion or moving to another location
 
-        :param file_name:
-        :type file_name:
-        :param title:
-        :type title:
-        :return:
-        :rtype:
+        :param file_name: The filename of the video to be processed
+        :param title: The video's title
+        :return: A list of the filenames that were cleaned
         """
         cleaned_files = []
         if get_value(cleaning_type) == self.CLEANING_TYPE_RECYCLE:
@@ -355,15 +346,12 @@ class Janitor:
 
             return cleaned_files
 
-    def clean_category(self, video_type, progress_dialog):
+    def clean_category(self, video_type: str, progress_dialog: DialogProgress) -> Tuple[List, int]:
         """
         Clean all watched videos of the provided type.
 
-        :type video_type: unicode
         :param video_type: The type of videos to clean (one of TVSHOWS, MOVIES, MUSIC_VIDEOS).
         :param progress_dialog: The dialog that is used to display the progress in
-        :type progress_dialog: DialogProgress
-        :rtype: (list, int)
         :return: A list of the filenames that were cleaned and the return status.
         """
 
@@ -401,11 +389,10 @@ class Janitor:
 
         return cleaned_files, self.exit_status
 
-    def clean(self):
+    def clean(self) -> Tuple[List, ExitStatus]:
         """
         Clean up any watched videos in the Kodi library, satisfying any conditions set via the addon settings.
 
-        :rtype: (dict, int)
         :return: A single-line (localized) summary of the cleaning results to be used for a notification, plus a status.
         """
         debug("Starting cleaning routine.")
@@ -443,7 +430,7 @@ class Janitor:
 
         return cleaning_results, self.exit_status
 
-    def clean_library(self, purged_files):
+    def clean_library(self, purged_files: list):
         # Check if we need to perform any post-cleaning operations
         if purged_files and get_value(clean_library):
             self.monitor.waitForAbort(2)  # Sleep 2 seconds to make sure file I/O is done.
@@ -456,16 +443,14 @@ class Janitor:
         else:
             debug("Cleaning Kodi library not required and/or not enabled.")
 
-    def clean_extras(self, source, dest_folder=None):
+    def clean_extras(self, source: str, dest_folder: str = None):
         """Clean files related to another file based on the user's preferences.
 
         Related files are files that only differ by extension, or that share a prefix in case of stacked movies.
 
         Examples of related files include NFO files, thumbnails, subtitles, fanart, etc.
 
-        :type source: unicode
         :param source: Location of the file whose related files should be cleaned.
-        :type dest_folder: unicode
         :param dest_folder: (Optional) The folder where related files should be moved to. Not needed when deleting.
         """
         if get_value(clean_related):
