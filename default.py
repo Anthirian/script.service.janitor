@@ -3,7 +3,10 @@
 
 import json
 import sys
-
+from abc import ABC
+from dataclasses import dataclass
+from enum import Enum, auto
+from typing import List
 from xbmcgui import DialogProgress, Dialog
 
 from util import exclusions
@@ -20,7 +23,32 @@ KNOWN_VIDEO_TYPES = (MOVIES, MUSIC_VIDEOS, TVSHOWS)
 LOCALIZED_VIDEO_TYPES = {MOVIES: translate(32626), MUSIC_VIDEOS: translate(32627), TVSHOWS: translate(32628)}
 
 
-class Database(object):
+@dataclass
+class Video(ABC):
+    path: str
+
+
+class Movie(Video):
+    title: str
+    year: int
+
+
+@dataclass
+class Episode(Video):
+    title: str
+    series: str
+    year: int
+
+
+@dataclass
+class MusicVideo(Video):
+    artist: str
+    title: str
+    album: str
+    year: int
+
+
+class Database:
     """TODO: Docstring
     """
     movie_filter_fields = ["title", "plot", "plotoutline", "tagline", "votes", "rating", "time", "writers",
@@ -58,7 +86,7 @@ class Database(object):
         """
         self.settings = {}
 
-    def prepare_query(self, video_type):
+    def prepare_query(self, video_type: str) -> dict:
         """TODO: Docstring
         :rtype dict:
         :return the complete JSON-RPC request to be sent
@@ -117,9 +145,7 @@ class Database(object):
         return request
 
     @staticmethod
-    def check_errors(response):
-        """TODO: Docstring
-        """
+    def check_errors(response: str) -> dict:
         result = json.loads(response)
 
         try:
@@ -135,23 +161,19 @@ class Database(object):
         # No errors, so return actual response
         return result["result"]
 
-    def execute_query(self, query):
-        """TODO: Docstring
-        """
+    def execute_query(self, query: dict) -> dict:
         response = xbmc.executeJSONRPC(json.dumps(query))
         debug(f"[{query['method']}] Response: {response}")
 
         return self.check_errors(response)
 
-    def get_expired_videos(self, video_type):
+    def get_expired_videos(self, video_type: str) -> List[Video]:
         """
         Find videos in the Kodi library that have been watched.
 
         Respects any other conditions user enables in the addon's settings.
 
-        :type video_type: unicode
         :param video_type: The type of videos to find (one of the globals MOVIES, MUSIC_VIDEOS or TVSHOWS).
-        :rtype: list
         :return: A list of expired videos, along with a number of extra attributes specific to the video type.
         """
 
@@ -185,7 +207,7 @@ class Database(object):
                     debug("Breaking the loop")
                     break  # Stop looping after the first match for video_type
 
-    def get_video_sources(self, limits=None, sort=None):
+    def get_video_sources(self, limits: dict = None, sort: dict = None) -> dict:
         """
         Retrieve the user configured video sources from Kodi
 
@@ -194,11 +216,8 @@ class Database(object):
         https://kodi.wiki/view/JSON-RPC_API/
 
         :param limits: The limits to impose on JSON-RPC
-        :type limits: dict
         :param sort: The sorting options for JSON-RPC
-        :type sort: dict
         :return: The user configured video sources
-        :rtype: dict
         """
 
         if sort is None:
@@ -220,7 +239,13 @@ class Database(object):
         return self.execute_query(request)
 
 
-class Janitor(object):
+class ExitStatus(Enum):
+    SUCCESS = auto()
+    FAILURE = auto()
+    ABORTED = auto()
+
+
+class Janitor:
     """
     The Cleaner class allows users to clean up their movie, TV show and music video collection by removing watched
     items. The user can apply a number of conditions to cleaning, such as limiting cleaning to files with a given
@@ -239,34 +264,29 @@ class Janitor(object):
     DEFAULT_ACTION_CLEAN = "0"
     DEFAULT_ACTION_VIEW_LOG = "1"
 
-    STATUS_SUCCESS = 1
-    STATUS_FAILURE = 2
-    STATUS_ABORTED = 3
-
     progress = DialogProgress()
     monitor = xbmc.Monitor()
     silent = True
-    exit_status = STATUS_SUCCESS
+    exit_status = ExitStatus.SUCCESS
     total_expired = 0
 
     def __init__(self):
         debug(f"{ADDON.getAddonInfo('name')} version {ADDON.getAddonInfo('version')} loaded.")
+        debug(f"Running Python: {sys.version}")
         self.db = Database()
 
-    def user_aborted(self, progress_dialog):
+    def user_aborted(self, progress_dialog: DialogProgress) -> bool:
         """
         Test if the progress dialog has been canceled by the user. If the cleaner was started as a service this will
         always return False
 
         :param progress_dialog: The dialog to check for cancellation
-        :type progress_dialog: DialogProgress
-        :rtype: bool
         :return: True if the user cancelled cleaning, False otherwise.
         """
         if self.silent:
             return False
         elif progress_dialog.iscanceled():
-            self.exit_status = self.STATUS_ABORTED
+            self.exit_status = ExitStatus.ABORTED
             return True
 
     def show_progress(self):
@@ -281,21 +301,18 @@ class Janitor(object):
         """
         self.silent = True
 
-    def process_file(self, file_name, title):
+    def process_file(self, file_name: str, title: str) -> list:
         """Handle the cleaning of a video file, either via deletion or moving to another location
 
-        :param file_name:
-        :type file_name:
-        :param title:
-        :type title:
-        :return:
-        :rtype:
+        :param file_name: The filename of the video to be processed
+        :param title: The video's title
+        :return: A list of the filenames that were cleaned
         """
         cleaned_files = []
         if get_value(cleaning_type) == self.CLEANING_TYPE_RECYCLE:
             # Recycle bin not set up, prompt user to set up now
             if get_value(recycle_bin) == "":
-                self.exit_status = self.STATUS_ABORTED
+                self.exit_status = ExitStatus.ABORTED
                 if Dialog().yesno(ADDON_NAME, translate(32521)):
                     xbmc.executebuiltin(f"Addon.OpenSettings({ADDON_ID})")
                 return []
@@ -309,12 +326,12 @@ class Janitor(object):
                 cleaned_files.extend(split_stack(file_name))
                 self.clean_extras(file_name, new_path)
                 delete_empty_folders(os.path.dirname(file_name))
-                self.exit_status = self.STATUS_SUCCESS
+                self.exit_status = ExitStatus.SUCCESS
                 return cleaned_files
             else:
                 debug("Errors occurred while recycling. Skipping related files and directories.", xbmc.LOGWARNING)
                 Dialog().ok(translate(32611), translate(32612))
-                self.exit_status = self.STATUS_FAILURE
+                self.exit_status = ExitStatus.FAILURE
                 return cleaned_files
         elif get_value(cleaning_type) == self.CLEANING_TYPE_DELETE:
             if delete(file_name):
@@ -322,22 +339,19 @@ class Janitor(object):
                 cleaned_files.extend(split_stack(file_name))
                 self.clean_extras(file_name)
                 delete_empty_folders(os.path.dirname(file_name))
-                self.exit_status = self.STATUS_SUCCESS
+                self.exit_status = ExitStatus.SUCCESS
             else:
                 debug("Errors occurred during file deletion", xbmc.LOGWARNING)
-                self.exit_status = self.STATUS_FAILURE
+                self.exit_status = ExitStatus.FAILURE
 
             return cleaned_files
 
-    def clean_category(self, video_type, progress_dialog):
+    def clean_category(self, video_type: str, progress_dialog: DialogProgress) -> Tuple[List, int]:
         """
         Clean all watched videos of the provided type.
 
-        :type video_type: unicode
         :param video_type: The type of videos to clean (one of TVSHOWS, MOVIES, MUSIC_VIDEOS).
         :param progress_dialog: The dialog that is used to display the progress in
-        :type progress_dialog: DialogProgress
-        :rtype: (list, int)
         :return: A list of the filenames that were cleaned and the return status.
         """
 
@@ -348,7 +362,7 @@ class Janitor(object):
             # Check at the beginning of each loop if the user pressed cancel
             # We do not want to cancel cleaning in the middle of a cycle to prevent issues with leftovers
             if self.user_aborted(progress_dialog):
-                self.exit_status = self.STATUS_ABORTED
+                self.exit_status = ExitStatus.ABORTED
                 progress_dialog.close()
                 break
             else:
@@ -371,15 +385,14 @@ class Janitor(object):
             if self.user_aborted(progress_dialog):
                 # Prevent another dialog from appearing if the user aborts
                 # after all of this video_type were already cleaned
-                self.exit_status = self.STATUS_ABORTED
+                self.exit_status = ExitStatus.ABORTED
 
         return cleaned_files, self.exit_status
 
-    def clean(self):
+    def clean(self) -> Tuple[List, ExitStatus]:
         """
         Clean up any watched videos in the Kodi library, satisfying any conditions set via the addon settings.
 
-        :rtype: (dict, int)
         :return: A single-line (localized) summary of the cleaning results to be used for a notification, plus a status.
         """
         debug("Starting cleaning routine.")
@@ -392,7 +405,7 @@ class Janitor(object):
 
         if not get_value(clean_when_low_disk_space) or (get_value(clean_when_low_disk_space) and disk_space_low()):
             for video_type in KNOWN_VIDEO_TYPES:
-                if self.exit_status != self.STATUS_ABORTED:
+                if self.exit_status != ExitStatus.ABORTED:
                     progress = DialogProgress()
                     if not self.silent:
                         progress.create(f"{ADDON_NAME} - {LOCALIZED_VIDEO_TYPES[video_type].capitalize()}")
@@ -417,7 +430,7 @@ class Janitor(object):
 
         return cleaning_results, self.exit_status
 
-    def clean_library(self, purged_files):
+    def clean_library(self, purged_files: list):
         # Check if we need to perform any post-cleaning operations
         if purged_files and get_value(clean_library):
             self.monitor.waitForAbort(2)  # Sleep 2 seconds to make sure file I/O is done.
@@ -430,16 +443,14 @@ class Janitor(object):
         else:
             debug("Cleaning Kodi library not required and/or not enabled.")
 
-    def clean_extras(self, source, dest_folder=None):
+    def clean_extras(self, source: str, dest_folder: str = None):
         """Clean files related to another file based on the user's preferences.
 
         Related files are files that only differ by extension, or that share a prefix in case of stacked movies.
 
         Examples of related files include NFO files, thumbnails, subtitles, fanart, etc.
 
-        :type source: unicode
         :param source: Location of the file whose related files should be cleaned.
-        :type dest_folder: unicode
         :param dest_folder: (Optional) The folder where related files should be moved to. Not needed when deleting.
         """
         if get_value(clean_related):
@@ -487,7 +498,7 @@ if __name__ == "__main__":
                 # Videos were cleaned. Ask the user to view the log file.
                 if Dialog().yesno(translate(32514), translate(32519).format(amount=len(results))):
                     view_log()
-            elif return_status == janitor.STATUS_ABORTED:
+            elif return_status == ExitStatus.ABORTED:
                 pass  # Do not show cleaning results in case user aborted, e.g. to set holding folder
             else:
                 Dialog().ok(ADDON_NAME, translate(32520))
