@@ -16,7 +16,6 @@ from util.settings import *
 MOVIES = "movies"
 MUSIC_VIDEOS = "musicvideos"
 TVSHOWS = "episodes"
-KNOWN_VIDEO_TYPES = (MOVIES, MUSIC_VIDEOS, TVSHOWS)
 LOCALIZED_VIDEO_TYPES = {MOVIES: translate(32626), MUSIC_VIDEOS: translate(32627), TVSHOWS: translate(32628)}
 
 
@@ -157,33 +156,24 @@ class Database(object):
 
         # TODO: split up this method into a pure database query and let the Janitor class handle the rest
 
-        video_types = (TVSHOWS, MOVIES, MUSIC_VIDEOS)
-        setting_types = (clean_tv_shows, clean_movies, clean_music_videos)
+        # Do the actual work here
+        query = self.prepare_query(video_type)
+        result = self.execute_query(query)
 
-        # TODO: Is this loop still required? Maybe settings_types[video_type] is sufficient?
-        for type, setting in zip(video_types, setting_types):
-            if type == video_type and get_value(setting):
-                # Do the actual work here
-                query = self.prepare_query(video_type)
-                result = self.execute_query(query)
-
-                try:
-                    debug(f"Found {result['limits']['total']} watched {video_type} matching your conditions")
-                    debug(f"JSON Response: {result}")
-                    for video in result[video_type]:
-                        # Gather all properties and add it to this video's information
-                        temp = []
-                        for p in self.properties[video_type]:
-                            temp.append(video[p])
-                        yield temp
-                except KeyError as ke:
-                    if video_type in str(ke):
-                        pass  # no expired videos found
-                    else:
-                        raise KeyError(f"Could not find key {ke} in response.") from ke
-                finally:
-                    debug("Breaking the loop")
-                    break  # Stop looping after the first match for video_type
+        try:
+            debug(f"Found {result['limits']['total']} watched {video_type} matching your conditions")
+            debug(f"JSON Response: {result}")
+            for video in result[video_type]:
+                # Gather all properties and add it to this video's information
+                temp = []
+                for p in self.properties[video_type]:
+                    temp.append(video[p])
+                yield temp
+        except KeyError as ke:
+            if video_type in str(ke):
+                pass  # no expired videos found
+            else:
+                raise KeyError(f"Could not find key {ke} in response.") from ke
 
     def get_video_sources(self, limits=None, sort=None):
         """
@@ -390,8 +380,16 @@ class Janitor(object):
 
         cleaning_results = []
 
+        VIDEO_TYPES_TO_CLEAN = []
+        if get_value(clean_tv_shows):
+            VIDEO_TYPES_TO_CLEAN.append(TVSHOWS)
+        if get_value(clean_music_videos):
+            VIDEO_TYPES_TO_CLEAN.append(MUSIC_VIDEOS)
+        if get_value(clean_movies):
+            VIDEO_TYPES_TO_CLEAN.append(MOVIES)
+
         if not get_value(clean_when_low_disk_space) or (get_value(clean_when_low_disk_space) and disk_space_low()):
-            for video_type in KNOWN_VIDEO_TYPES:
+            for video_type in VIDEO_TYPES_TO_CLEAN:
                 if self.exit_status != self.STATUS_ABORTED:
                     progress = DialogProgress()
                     if not self.silent:
